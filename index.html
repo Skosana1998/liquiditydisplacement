@@ -31,6 +31,37 @@ button,a{-webkit-tap-highlight-color:transparent}
 button{cursor:pointer}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--pink);outline-offset:4px}
 .container{width:min(var(--max),calc(100% - 44px));margin:auto}
+
+/* FIVE-SECOND INTRO LOADER */
+#ldu-loader{
+  position:fixed;inset:0;z-index:1000000;
+  display:flex;align-items:center;justify-content:center;
+  background:#09090c;
+  opacity:1;visibility:visible;
+  transition:opacity .7s ease,visibility .7s ease;
+}
+#ldu-loader.finished{opacity:0;visibility:hidden;pointer-events:none}
+.loader-content{text-align:center;padding:25px}
+.loader-logo{
+  font:800 58px/1 Manrope,sans-serif;
+  letter-spacing:-4px;color:#fff;
+}
+.loader-logo span{font-size:15px;color:var(--red);vertical-align:top;letter-spacing:0}
+.loader-line{
+  width:190px;height:3px;background:#25252d;
+  margin:27px auto 20px;overflow:hidden;border-radius:10px;
+}
+.loader-line::after{
+  content:"";display:block;width:100%;height:100%;
+  background:linear-gradient(90deg,#c9142b,#ff7480);
+  transform:scaleX(0);transform-origin:left;
+  animation:loaderProgress 5s linear forwards;
+}
+.loader-content p{font-size:.68rem;letter-spacing:.2em;color:#eee;font-weight:800}
+.loader-content small{display:block;margin-top:8px;font-size:.58rem;letter-spacing:.16em;color:#777}
+
+@keyframes loaderProgress{to{transform:scaleX(1)}}
+
 .announcement{padding:9px 15px;text-align:center;background:linear-gradient(90deg,#421019,#171016,#421019);border-bottom:1px solid rgba(255,52,72,.25);font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#ffd9dd}
 .announcement span{color:var(--pink)}
 header{position:sticky;top:0;z-index:50;background:rgba(9,9,12,.76);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--line)}
@@ -39,7 +70,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,9,12,.76);backdrop-fil
 .brand-mark{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border-radius:15px;background:linear-gradient(145deg,#ff5869,#c51129);box-shadow:0 0 30px rgba(255,52,72,.22);font:800 .85rem Manrope,sans-serif}
 .brand-name{font:800 .78rem/1.3 Manrope,sans-serif;letter-spacing:.035em}
 .brand-name small{display:block;color:#a9a9b7;font-size:.63rem;letter-spacing:.22em;margin-top:4px}
-.navlinks{display:flex;align-items:center;gap:25px;color:#c1c1cc;font-size:.84rem}
+.navlinks{display:flex;align-items:center;gap:20px;color:#c1c1cc;font-size:.82rem}
 .navlinks a{transition:color .2s}
 .navlinks a:hover{color:var(--pink)}
 .navright{display:flex;align-items:center;gap:9px}
@@ -54,6 +85,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(9,9,12,.76);backdrop-fil
 .mobile-nav{display:none;padding:8px 0 20px}
 .mobile-nav.open{display:grid;gap:7px}
 .mobile-nav a{padding:12px 15px;border:1px solid var(--line);border-radius:12px;color:#dddde7;background:rgba(255,255,255,.035)}
+
 .hero{padding:100px 0 80px;position:relative;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:60px}
 .kicker{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(255,80,98,.27);background:rgba(255,52,72,.075);border-radius:999px;padding:8px 13px;color:#ff9ba5;font-size:.68rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:23px}
@@ -81,6 +113,7 @@ h1{font-size:clamp(3.1rem,6.7vw,6.2rem);font-weight:800;max-width:730px}
 .terminal-stat small{display:block;color:#9696a5;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
 .terminal-stat strong{font-size:.82rem}
 .visual-caption{font-size:.68rem;color:#858592;text-align:center;margin-top:13px}
+
 .section{padding:94px 0}
 .section-alt{background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.012));border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:37px}
@@ -178,6 +211,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
 .footer-links a:hover{color:var(--pink)}
 .footer-bottom{border-top:1px solid var(--line);margin-top:30px;padding-top:20px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:#7f7f8d;font-size:.7rem}
 .disclaimer{max-width:900px;line-height:1.85}
+
 .modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.78);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);display:none;align-items:center;justify-content:center;padding:18px}
 .modal-backdrop.open{display:flex}
 .modal{position:relative;width:min(100%,590px);max-height:88vh;overflow:auto;border:1px solid rgba(255,255,255,.17);border-radius:25px;padding:30px;background:linear-gradient(145deg,#1c1c25,#0d0d12);box-shadow:0 30px 100px rgba(0,0,0,.6)}
@@ -187,14 +221,77 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
 .modal p{font-size:.88rem;line-height:1.9;color:#b7b7c4;margin-bottom:13px}
 .modal-note{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:15px;padding:16px;margin:20px 0;font-size:.78rem;color:#c1c1cc;line-height:1.8}
 .modal .actions{margin-top:18px}
-.promo-card{border-color:rgba(255,52,72,.32);background:radial-gradient(ellipse at 90% 0,rgba(255,52,72,.16),transparent 45%),linear-gradient(145deg,#1c1c24,#0c0c11)}
-.promo-label{display:inline-block;background:rgba(255,52,72,.13);border:1px solid rgba(255,52,72,.25);color:#ff9aa4;border-radius:999px;padding:7px 10px;font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:150;display:none;max-width:calc(100% - 30px);padding:12px 17px;border-radius:13px;background:#24242c;border:1px solid var(--line);color:white;font-size:.82rem;box-shadow:0 10px 40px #0007}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.price-card{padding:30px;position:relative;overflow:hidden}
+.price-card.featured{border-color:rgba(255,52,72,.45);background:linear-gradient(145deg,rgba(255,52,72,.12),rgba(255,255,255,.025))}
+.price-label{font-size:.67rem;color:#ff8994;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.price-card h3{font-size:1.5rem;margin:13px 0}
+.price-amount{font:800 clamp(2rem,5vw,3rem) Manrope,sans-serif;letter-spacing:-.06em}
+.price-amount small{font:500 .8rem "DM Sans",sans-serif;color:var(--muted);letter-spacing:0}
+.price-card p{font-size:.85rem;color:var(--muted);line-height:1.85;margin:13px 0 20px}
+.price-card ul{padding-left:18px;color:#c4c4ce;font-size:.81rem;margin:16px 0 22px}
+.price-card li{margin:8px 0}
+.price-card .btn{width:100%}
+.promo-strip{margin-top:22px;padding:23px;border:1px solid rgba(255,52,72,.3);border-radius:19px;background:linear-gradient(100deg,rgba(255,52,72,.12),rgba(255,255,255,.025));display:flex;align-items:center;justify-content:space-between;gap:20px}
+.promo-strip h3{font-size:1.1rem;margin-bottom:5px}
+.promo-strip p{font-size:.82rem;color:#bdbdc8}
+.promo-strip strong{color:#ff9ca5}
+
+/* COMMUNITY */
+.community-panel{padding:clamp(25px,5vw,45px);display:flex;align-items:center;justify-content:space-between;gap:25px;background:radial-gradient(ellipse at 90% 0,rgba(255,52,72,.14),transparent 45%),linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.community-panel h3{font-size:clamp(1.5rem,4vw,2.3rem);margin-bottom:12px}
+.community-panel p{max-width:650px;color:var(--muted);font-size:.88rem;line-height:1.9}
+.community-icon{width:65px;height:65px;flex-shrink:0;border-radius:20px;display:grid;place-items:center;background:rgba(255,52,72,.12);border:1px solid rgba(255,52,72,.25);font-size:1.8rem}
+
+/* LDM50 SCROLL POPUP */
+.ldm50-overlay{
+  position:fixed;inset:0;z-index:99990;
+  display:none;align-items:center;justify-content:center;
+  padding:18px;background:rgba(0,0,0,.84);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.ldm50-overlay.show{display:flex;animation:ldmFade .35s ease}
+.ldm50-popup{
+  position:relative;width:min(100%,460px);padding:35px 27px;
+  text-align:center;border:1px solid rgba(255,255,255,.16);
+  border-radius:25px;background:
+  radial-gradient(ellipse at 50% 0,rgba(255,52,72,.2),transparent 48%),
+  linear-gradient(145deg,#1c1c25,#0c0c11);
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
+.ldm50-close{
+  position:absolute;right:13px;top:11px;width:35px;height:35px;
+  border:1px solid var(--line);border-radius:50%;
+  color:#fff;background:rgba(255,255,255,.06);font-size:1.3rem;
+}
+.ldm50-kicker{font-size:.65rem;color:#ff9ca5;font-weight:800;letter-spacing:.17em}
+.ldm50-discount{font:800 clamp(3.6rem,14vw,5.2rem)/1 Manrope,sans-serif;letter-spacing:-.08em;color:#ff4357;margin:20px 0 8px}
+.ldm50-popup h2{font-size:1.65rem;margin:10px 0}
+.ldm50-popup p{font-size:.85rem;color:#bcbcc8;line-height:1.8;margin:12px 0}
+.ldm50-code{
+  display:block;margin:19px auto 12px;padding:15px;
+  border:1px dashed rgba(255,95,111,.7);border-radius:12px;
+  background:rgba(255,52,72,.08);
+  color:#fff;font:800 1.55rem Manrope,sans-serif;letter-spacing:.2em;
+}
+.ldm50-copy{
+  width:100%;padding:15px;border:0;border-radius:11px;
+  background:linear-gradient(135deg,#ff4a5d,#c9142b);
+  color:white;font-weight:900;font-size:.85rem;
+}
+.ldm50-copy:hover{filter:brightness(1.1)}
+.ldm50-checkout{display:block;margin-top:12px;font-size:.78rem;color:#ff9ca5;text-decoration:underline}
+.ldm50-limit{margin-top:17px!important;font-size:.7rem!important;color:#858592!important}
+@keyframes ldmFade{from{opacity:0}to{opacity:1}}
+
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 @media(max-width:1000px){
- .navlinks{gap:14px}.navright .member-button{display:none}
+ .navlinks{gap:12px}.navright .member-button{display:none}
  .hero-grid{gap:35px}.hero{padding-top:75px}
  .pattern-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  .benefit-grid{grid-template-columns:repeat(2,1fr)}
@@ -218,6 +315,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
  .founder-art{min-height:310px}
  .footer-top{display:grid;grid-template-columns:1fr 1fr}
  .footer-brand{grid-column:1/-1}
+ .community-panel{align-items:flex-start;flex-direction:column}
 }
 @media(max-width:480px){
  .container{width:calc(100% - 26px)}
@@ -233,7 +331,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
  .terminal-stat{padding:11px}.terminal-stat strong{font-size:.73rem}
  .section{padding:58px 0}
  .section-head h2,.section-title{font-size:2.25rem}
- .pattern-grid,.curriculum-grid,.path-grid{grid-template-columns:1fr}
+ .pattern-grid,.curriculum-grid,.path-grid,.pricing-grid{grid-template-columns:1fr}
  .pattern-card{min-height:0;padding:22px}
  .pattern-card h3{font-size:1.3rem}
  .pattern-card .btn{width:100%}
@@ -248,12 +346,24 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
  .footer-bottom{display:block}
  .footer-bottom p+p{margin-top:10px}
  .modal{padding:24px 20px}
- .promo-card .actions .btn{width:100%}
+ .promo-strip{align-items:flex-start;flex-direction:column}
+ .promo-strip .btn{width:100%}
 }
 </style>
 </head>
 
 <body>
+
+<!-- LOADING SCREEN: HOMEPAGE REVEALS AFTER FIVE SECONDS -->
+<div id="ldu-loader" aria-label="Loading Liquidity Displacement University">
+  <div class="loader-content">
+    <div class="loader-logo">LDU<span>™</span></div>
+    <div class="loader-line"></div>
+    <p>LIQUIDITY DISPLACEMENT UNIVERSITY</p>
+    <small>PREPARING YOUR EXPERIENCE</small>
+  </div>
+</div>
+
 <div class="announcement">
   <span>LIQUIDITY DISPLACEMENT UNIVERSITY™</span> &nbsp;·&nbsp; A NEW STANDARD FOR PATTERN-FOCUSED LEARNING
 </div>
@@ -269,6 +379,8 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
       <a href="#patterns">Patterns</a>
       <a href="#university">University</a>
       <a href="#curriculum">Curriculum</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#community">Community</a>
       <a href="#founder">Founder</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -284,6 +396,8 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
     <a href="#patterns">Explore patterns</a>
     <a href="#university">About the university</a>
     <a href="#curriculum">Learning curriculum</a>
+    <a href="#pricing">Membership and pricing</a>
+    <a href="#community">Discord community</a>
     <a href="#benefits">Student experience</a>
     <a href="#founder">Meet the founder</a>
     <a href="#faq">Frequently asked questions</a>
@@ -293,6 +407,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
 </header>
 
 <main id="home">
+
   <section class="hero">
     <div class="container hero-grid">
       <div class="reveal">
@@ -372,12 +487,8 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
         <article class="glass-card mission-card reveal">
           <div class="mission-symbol" aria-hidden="true">◈</div>
           <h3>Our mission</h3>
-          <p>
-            To provide structured trading education that helps learners recognise recurring market behaviour, understand the logic of a chosen framework, practise with discipline and review their decisions responsibly.
-          </p>
-          <p style="margin-top:14px">
-            Our approach puts the learning process first: observe the market, identify the relevant pattern, wait for the required conditions, manage risk and review the outcome.
-          </p>
+          <p>To provide structured trading education that helps learners recognise recurring market behaviour, understand the logic of a chosen framework, practise with discipline and review their decisions responsibly.</p>
+          <p style="margin-top:14px">Our approach puts the learning process first: observe the market, identify the relevant pattern, wait for the required conditions, manage risk and review the outcome.</p>
         </article>
 
         <div class="mission-side">
@@ -455,9 +566,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
         </article>
       </div>
 
-      <p class="section-footnote">
-        Framework descriptions are introductory summaries. Full lessons, exact rules, examples and course materials should be provided through the relevant authorised student learning area. No pattern guarantees a profitable trade.
-      </p>
+      <p class="section-footnote">Framework descriptions are introductory summaries. Full lessons, exact rules, examples and course materials should be provided through the relevant authorised student learning area. No pattern guarantees a profitable trade.</p>
     </div>
   </section>
 
@@ -466,12 +575,8 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
       <div class="dark-copy reveal">
         <div class="eyebrow">A different learning philosophy</div>
         <h2>Stop collecting noise.<br><span class="gradient-text">Start building understanding.</span></h2>
-        <p>
-          The goal is not to make every chart look like a setup. The goal is to learn what your chosen framework is looking for, recognise when its conditions are absent and accept that some situations call for no trade.
-        </p>
-        <p>
-          LDU places emphasis on study, practice, risk awareness and review. Education can support decision-making, but it cannot remove uncertainty from financial markets.
-        </p>
+        <p>The goal is not to make every chart look like a setup. The goal is to learn what your chosen framework is looking for, recognise when its conditions are absent and accept that some situations call for no trade.</p>
+        <p>LDU places emphasis on study, practice, risk awareness and review. Education can support decision-making, but it cannot remove uncertainty from financial markets.</p>
         <div class="actions" style="margin-top:24px">
           <a class="btn primary" href="#curriculum">Explore the curriculum ↗</a>
           <a class="btn glass-btn" href="login.html">Student login</a>
@@ -494,45 +599,85 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
       </div>
 
       <div class="curriculum-grid">
-        <article class="glass-card learn-card reveal">
-          <div class="learn-number">MODULE 01</div>
-          <h3>Market observation</h3>
-          <p>Build a foundation for observing price behaviour and describing what is happening without rushing into a decision.</p>
-          <ul><li>Reading market context</li><li>Identifying recurring behaviour</li><li>Distinguishing observation from assumption</li></ul>
-        </article>
-        <article class="glass-card learn-card reveal">
-          <div class="learn-number">MODULE 02</div>
-          <h3>Pattern recognition</h3>
-          <p>Study the selected framework and learn to recognise the characteristics described in its course material.</p>
-          <ul><li>Framework terminology</li><li>Pattern identification</li><li>Understanding when conditions are incomplete</li></ul>
-        </article>
-        <article class="glass-card learn-card reveal">
-          <div class="learn-number">MODULE 03</div>
-          <h3>Confirmation and planning</h3>
-          <p>Understand why a trading idea needs a defined process and why waiting can be part of a disciplined approach.</p>
-          <ul><li>Confirmation concepts</li><li>Trade planning principles</li><li>Recognising invalidation and uncertainty</li></ul>
-        </article>
-        <article class="glass-card learn-card reveal">
-          <div class="learn-number">MODULE 04</div>
-          <h3>Risk awareness</h3>
-          <p>Understand that every trade carries risk and that position sizing and loss limits are important parts of a plan.</p>
-          <ul><li>Risk and reward concepts</li><li>Planning potential losses</li><li>Avoiding impulsive decisions</li></ul>
-        </article>
-        <article class="glass-card learn-card reveal">
-          <div class="learn-number">MODULE 05</div>
-          <h3>Chart study and review</h3>
-          <p>Develop a repeatable habit of studying examples, documenting decisions and reviewing what happened.</p>
-          <ul><li>Chart-marking practice</li><li>Trade journals</li><li>Learning from mistakes and missed setups</li></ul>
-        </article>
-        <article class="glass-card learn-card reveal">
-          <div class="learn-number">MODULE 06</div>
-          <h3>Consistency and discipline</h3>
-          <p>Build routines that encourage patience, responsible risk-taking and continuous improvement.</p>
-          <ul><li>Following a written process</li><li>Emotional discipline</li><li>Ongoing learning and review</li></ul>
-        </article>
+        <article class="glass-card learn-card reveal"><div class="learn-number">MODULE 01</div><h3>Market observation</h3><p>Build a foundation for observing price behaviour and describing what is happening without rushing into a decision.</p><ul><li>Reading market context</li><li>Identifying recurring behaviour</li><li>Distinguishing observation from assumption</li></ul></article>
+        <article class="glass-card learn-card reveal"><div class="learn-number">MODULE 02</div><h3>Pattern recognition</h3><p>Study the selected framework and learn to recognise the characteristics described in its course material.</p><ul><li>Framework terminology</li><li>Pattern identification</li><li>Understanding when conditions are incomplete</li></ul></article>
+        <article class="glass-card learn-card reveal"><div class="learn-number">MODULE 03</div><h3>Confirmation and planning</h3><p>Understand why a trading idea needs a defined process and why waiting can be part of a disciplined approach.</p><ul><li>Confirmation concepts</li><li>Trade planning principles</li><li>Recognising invalidation and uncertainty</li></ul></article>
+        <article class="glass-card learn-card reveal"><div class="learn-number">MODULE 04</div><h3>Risk awareness</h3><p>Understand that every trade carries risk and that position sizing and loss limits are important parts of a plan.</p><ul><li>Risk and reward concepts</li><li>Planning potential losses</li><li>Avoiding impulsive decisions</li></ul></article>
+        <article class="glass-card learn-card reveal"><div class="learn-number">MODULE 05</div><h3>Chart study and review</h3><p>Develop a repeatable habit of studying examples, documenting decisions and reviewing what happened.</p><ul><li>Chart-marking practice</li><li>Trade journals</li><li>Learning from mistakes and missed setups</li></ul></article>
+        <article class="glass-card learn-card reveal"><div class="learn-number">MODULE 06</div><h3>Consistency and discipline</h3><p>Build routines that encourage patience, responsible risk-taking and continuous improvement.</p><ul><li>Following a written process</li><li>Emotional discipline</li><li>Ongoing learning and review</li></ul></article>
       </div>
 
       <p class="section-footnote">This is a high-level curriculum overview, not a claim that every module or resource is already published. The actual course contents should match the lessons made available to enrolled students.</p>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP AND WHOP CHECKOUTS -->
+  <section class="section section-alt" id="pricing">
+    <div class="container">
+      <div class="section-head reveal">
+        <div><div class="eyebrow">Membership and access</div><h2>Choose how you want to participate.</h2></div>
+        <p>Choose the service that fits your learning needs. Checkout and payment are handled securely through the Whop checkout pages.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="glass-card price-card featured reveal">
+          <div class="price-label">VIP MEMBERSHIP</div>
+          <h3>VIP Real-Time Trade Alerts</h3>
+          <div class="price-amount">R1,500 <small>once-off</small></div>
+          <p>Access the VIP real-time trade alerts membership through the official checkout.</p>
+          <ul>
+            <li>VIP trade-alert membership</li>
+            <li>Real-time alert access according to membership terms</li>
+            <li>Checkout and payment through Whop</li>
+          </ul>
+          <a class="btn primary" href="https://whop.com/checkout/plan_Y08CNHiQN3pya" target="_blank" rel="noopener noreferrer">GET VIP SIGNALS ↗</a>
+        </article>
+
+        <article class="glass-card price-card reveal">
+          <div class="price-label">PERSONAL DEVELOPMENT</div>
+          <h3>Private Mentorship</h3>
+          <div class="price-amount">R2,500 <small>membership price</small></div>
+          <p>Start with a 3-day free trial through the Whop checkout. Review the checkout terms carefully before confirming.</p>
+          <ul>
+            <li>3-day free trial as configured at checkout</li>
+            <li>Mentorship membership access</li>
+            <li>Payment and subscription terms shown by Whop</li>
+          </ul>
+          <a class="btn primary" href="https://whop.com/checkout/plan_J8We2VYRgzsnz" target="_blank" rel="noopener noreferrer">START MENTORSHIP TRIAL ↗</a>
+        </article>
+      </div>
+
+      <div class="promo-strip reveal">
+        <div>
+          <h3>Founding Members Promotion — 50% OFF</h3>
+          <p>Use discount code <strong>LDM50</strong> at Whop checkout. Limited to the first 50 successful redemptions.</p>
+        </div>
+        <a class="btn glass-btn" href="#community">Explore LDU ↗</a>
+      </div>
+
+      <p class="section-footnote">Discount code LDM50 must be configured and limited to 50 redemptions in Whop. The code is not automatically applied by this website. Final prices, trial conditions and billing dates are determined by the Whop checkout.</p>
+    </div>
+  </section>
+
+  <!-- DISCORD COMMUNITY -->
+  <section class="section" id="community">
+    <div class="container">
+      <div class="section-head reveal">
+        <div><div class="eyebrow">The LDU community</div><h2>Learn alongside other market students.</h2></div>
+        <p>Join the community space to connect, follow discussions and stay connected with the LDU learning environment.</p>
+      </div>
+
+      <div class="glass-card community-panel reveal">
+        <div>
+          <div class="eyebrow">Official community access</div>
+          <h3>Continue the conversation on Discord.</h3>
+          <p>Join the LDU community on Discord for community discussions and updates. Please follow the server rules and never share your account passwords or private payment details.</p>
+          <div class="actions" style="margin-top:20px">
+            <a class="btn primary" href="https://discord.gg/bB2dDFV7P" target="_blank" rel="noopener noreferrer">JOIN THE DISCORD COMMUNITY ↗</a>
+          </div>
+        </div>
+        <div class="community-icon" aria-hidden="true">◈</div>
+      </div>
     </div>
   </section>
 
@@ -570,15 +715,9 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
       <div class="founder-copy reveal">
         <div class="founder-label">The vision behind LDU</div>
         <h2>Built from a belief in patterns, process and discipline.</h2>
-        <p>
-          Liquidity Displacement University™ represents an education-focused chapter built around the study of repeating market behaviour and proprietary pattern frameworks.
-        </p>
-        <p>
-          The aim is to give learners a structured environment to study, practise, question their decisions and develop their understanding of trading over time.
-        </p>
-        <p>
-          Discover the founder's story, background and vision on the dedicated founder page.
-        </p>
+        <p>Liquidity Displacement University™ represents an education-focused chapter built around the study of repeating market behaviour and proprietary pattern frameworks.</p>
+        <p>The aim is to give learners a structured environment to study, practise, question their decisions and develop their understanding of trading over time.</p>
+        <p>Discover the founder's story, background and vision on the dedicated founder page.</p>
         <div class="actions" style="margin-top:23px">
           <a class="btn primary" href="founder.html">Meet the founder ↗</a>
           <a class="btn glass-btn" href="register.html">Join LDU</a>
@@ -622,7 +761,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
         <div class="actions" style="margin-top:18px">
           <a class="btn primary" href="login.html">Student login ↗</a>
           <a class="btn glass-btn" href="register.html">Create account</a>
-          <a class="btn glass-btn" href="mailto:Naswealthempire@gmail.com">Contact support</a>
+          <a class="btn glass-btn" href="mailto:liquiditydisplacement@gmail.com">Contact support</a>
         </div>
       </div>
     </div>
@@ -638,13 +777,14 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
       <div class="faq reveal">
         <details><summary>What is Liquidity Displacement University™?</summary><p>LDU is a trading education brand focused on proprietary pattern frameworks, repeating market behaviour, structured learning and disciplined decision-making.</p></details>
         <details><summary>Which patterns can I explore?</summary><p>The public homepage introduces the Liquidity Displacement Methodology™, Smart Money Withdraw Pattern, Origin 4 Pattern, Rejection Architecture Pattern and Daily Reload Pattern.</p></details>
-        <details><summary>Where can I see membership pricing?</summary><p>Pricing is intended for logged-in visitors. The login page must connect to the actual member-pricing experience. Prices and paid resources must also be protected by appropriate backend permissions, not just hidden in the page design.</p></details>
+        <details><summary>Where can I purchase VIP trade alerts?</summary><p>Use the VIP Real-Time Trade Alerts checkout button in the membership section. The checkout is processed through Whop.</p></details>
+        <details><summary>How does the mentorship free trial work?</summary><p>The mentorship checkout advertises a 3-day free trial. Review the Whop checkout carefully for the billing date, recurring payment amount and cancellation terms before confirming.</p></details>
+        <details><summary>How do I use the LDM50 discount?</summary><p>Copy the code LDM50 from the promotion popup and paste it into the discount-code field at Whop checkout. The promotion is limited to the first 50 successful redemptions, subject to the discount configuration in Whop.</p></details>
         <details><summary>Does registration automatically give me paid course access?</summary><p>No. Creating an account and purchasing a course are different steps. Paid access should be granted only after the relevant payment and membership have been verified.</p></details>
-        <details><summary>How will payments be handled?</summary><p>The website can direct students into the configured payment process. Live payment acceptance, payment notifications and automatic course access require a properly integrated provider and secure server-side verification.</p></details>
         <details><summary>Are the course videos and PDFs available now?</summary><p>Resources should only be described as available when they have actually been published and connected to the student portal. This homepage describes the intended learning experience without claiming that unconfigured features are live.</p></details>
         <details><summary>Does LDU guarantee profits or funded-account success?</summary><p>No. Trading carries a risk of loss. Education cannot guarantee profits, funded-account approval, payouts or any particular result. Results depend on many factors, and losses are possible.</p></details>
         <details><summary>Can beginners join?</summary><p>People should review the programme information and prerequisites provided for the particular course before enrolling. Trading involves risk, and beginners should understand the risks before trading with real money.</p></details>
-        <details><summary>How do I get help with my account?</summary><p>Contact <a href="mailto:Naswealthempire@gmail.com" style="color:#ff8b95;text-decoration:underline">Naswealthempire@gmail.com</a> for enquiries. Never send your password or full payment credentials by email.</p></details>
+        <details><summary>How do I get help with my account?</summary><p>Contact <a href="mailto:liquiditydisplacement@gmail.com" style="color:#ff8b95;text-decoration:underline">liquiditydisplacement@gmail.com</a> for enquiries. Never send your password or full payment credentials by email.</p></details>
       </div>
     </div>
   </section>
@@ -658,6 +798,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
         <div class="actions">
           <a class="btn primary" href="register.html">Enter the university ↗</a>
           <a class="btn glass-btn" href="#patterns">Explore frameworks</a>
+          <a class="btn glass-btn" href="#pricing">View membership</a>
         </div>
       </div>
     </div>
@@ -680,6 +821,8 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
         <div class="footer-links">
           <a href="#patterns">Trading patterns</a>
           <a href="#curriculum">Curriculum</a>
+          <a href="#pricing">Membership</a>
+          <a href="#community">Discord community</a>
           <a href="#founder">Founder</a>
           <a href="#benefits">Student experience</a>
         </div>
@@ -691,7 +834,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
           <a href="login.html">Student login</a>
           <a href="register.html">Register</a>
           <a href="#enrolment">How enrolment works</a>
-          <a href="mailto:Naswealthempire@gmail.com">Contact support</a>
+          <a href="mailto:liquiditydisplacement@gmail.com">Contact support</a>
         </div>
       </div>
 
@@ -713,7 +856,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
   </div>
 </footer>
 
-<!-- Pattern descriptions -->
+<!-- PATTERN DESCRIPTIONS -->
 <div class="modal-backdrop" id="patternModal" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle" aria-hidden="true">
   <div class="modal">
     <button class="modal-close" id="closePatternModal" aria-label="Close pattern overview">×</button>
@@ -728,18 +871,19 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
   </div>
 </div>
 
-<!-- Welcome promotion -->
-<div class="modal-backdrop" id="promoModal" role="dialog" aria-modal="true" aria-labelledby="promoTitle" aria-hidden="true">
-  <div class="modal promo-card">
-    <button class="modal-close" id="closePromo" aria-label="Close promotion">×</button>
-    <span class="promo-label">Welcome to LDU</span>
-    <h2 id="promoTitle">Your next chapter starts with understanding.</h2>
-    <p>Discover our proprietary pattern frameworks and explore a more structured approach to trading education.</p>
-    <div class="modal-note">Start by exploring the Liquidity Displacement Methodology™ or browse all five frameworks. No trading outcome is guaranteed.</div>
-    <div class="actions">
-      <a class="btn primary" id="promoExplore" href="#patterns">Explore the patterns ↗</a>
-      <button class="btn glass-btn" id="promoLater" type="button">Maybe later</button>
-    </div>
+<!-- LDM50 PROMOTION: OPENS AFTER TWO SCREEN LENGTHS -->
+<div class="ldm50-overlay" id="ldm50Popup" role="dialog" aria-modal="true" aria-labelledby="ldm50Title" aria-hidden="true">
+  <div class="ldm50-popup">
+    <button class="ldm50-close" id="ldm50Close" aria-label="Close discount promotion">×</button>
+    <div class="ldm50-kicker">LIQUIDITY DISPLACEMENT UNIVERSITY™</div>
+    <div class="ldm50-discount">50% OFF</div>
+    <h2 id="ldm50Title">Founding Members Offer</h2>
+    <p>Get 50% off your eligible membership with our exclusive founding-member discount.</p>
+    <p>Your discount code:</p>
+    <div class="ldm50-code" id="ldm50Code">LDM50</div>
+    <button class="ldm50-copy" id="copyLdm50" type="button">COPY DISCOUNT CODE</button>
+    <a class="ldm50-checkout" href="#pricing" id="ldm50Pricing">View membership and Whop checkout</a>
+    <p class="ldm50-limit">Limited to the first 50 successful redemptions. Enter the code at Whop checkout. Terms and eligibility apply.</p>
   </div>
 </div>
 
@@ -788,13 +932,34 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
 
   const $ = id => document.getElementById(id);
   const patternModal = $("patternModal");
-  const promoModal = $("promoModal");
+  const ldm50Popup = $("ldm50Popup");
   const menuBtn = $("menuBtn");
   const mobileNav = $("mobileNav");
   let previousFocus = null;
   let toastTimer = null;
+  let ldm50Shown = false;
 
   $("year").textContent = new Date().getFullYear();
+
+  /* FIVE-SECOND LOADER */
+  document.body.style.overflow = "hidden";
+
+  function hideLoader(){
+    const loader = $("ldu-loader");
+    if(!loader) return;
+    loader.classList.add("finished");
+    document.body.style.overflow = "";
+  }
+
+  function startLoaderTimer(){
+    setTimeout(hideLoader,5000);
+  }
+
+  if(document.readyState === "complete"){
+    startLoaderTimer();
+  }else{
+    window.addEventListener("load",startLoaderTimer,{once:true});
+  }
 
   function showToast(message){
     const toast = $("toast");
@@ -816,20 +981,25 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
   function closeModal(modal){
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden","true");
-    if(!patternModal.classList.contains("open") && !promoModal.classList.contains("open")){
+
+    if(!patternModal.classList.contains("open") && !ldm50Popup.classList.contains("show")){
       document.body.style.overflow = "";
     }
-    if(previousFocus && typeof previousFocus.focus === "function") previousFocus.focus();
+
+    if(previousFocus && typeof previousFocus.focus === "function"){
+      previousFocus.focus();
+    }
   }
 
   function openPattern(id){
     const item = patterns[id];
     if(!item) return;
+
     $("patternModalKicker").textContent = item.kicker;
     $("patternModalTitle").textContent = item.title;
     $("patternModalDescription").textContent = item.description;
     $("patternModalNote").textContent = item.note;
-    closeModal(promoModal);
+
     openModal(patternModal);
   }
 
@@ -838,23 +1008,12 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
   });
 
   $("closePatternModal").addEventListener("click",()=>closeModal(patternModal));
-  $("closePromo").addEventListener("click",()=>closeModal(promoModal));
-  $("promoLater").addEventListener("click",()=>closeModal(promoModal));
 
   patternModal.addEventListener("click",event=>{
     if(event.target === patternModal) closeModal(patternModal);
   });
-  promoModal.addEventListener("click",event=>{
-    if(event.target === promoModal) closeModal(promoModal);
-  });
 
-  document.addEventListener("keydown",event=>{
-    if(event.key === "Escape"){
-      if(patternModal.classList.contains("open")) closeModal(patternModal);
-      if(promoModal.classList.contains("open")) closeModal(promoModal);
-    }
-  });
-
+  /* MOBILE NAVIGATION */
   menuBtn.addEventListener("click",()=>{
     const isOpen = mobileNav.classList.toggle("open");
     menuBtn.setAttribute("aria-expanded",String(isOpen));
@@ -871,27 +1030,100 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
     });
   });
 
-  $("promoExplore").addEventListener("click",()=>{
-    closeModal(promoModal);
-    try{sessionStorage.setItem("ldu_promo_seen_session","1")}catch(e){}
+  /* LDM50 POPUP: SHOW AFTER TWO SCREEN LENGTHS, ONCE PER BROWSER */
+  let ldm50AlreadySeen = false;
+
+  try{
+    ldm50AlreadySeen = localStorage.getItem("ldm50_popup_seen_v1") === "1";
+  }catch(error){}
+
+  function showLdm50(){
+    if(ldm50Shown || ldm50AlreadySeen) return;
+    if(window.scrollY < window.innerHeight * 2) return;
+
+    ldm50Shown = true;
+
+    try{
+      localStorage.setItem("ldm50_popup_seen_v1","1");
+    }catch(error){}
+
+    ldm50Popup.classList.add("show");
+    ldm50Popup.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+    $("ldm50Close").focus();
+    window.removeEventListener("scroll",checkLdm50Scroll);
+  }
+
+  function checkLdm50Scroll(){
+    showLdm50();
+  }
+
+  if(!ldm50AlreadySeen){
+    window.addEventListener("scroll",checkLdm50Scroll,{passive:true});
+  }
+
+  function closeLdm50(){
+    ldm50Popup.classList.remove("show");
+    ldm50Popup.setAttribute("aria-hidden","true");
+
+    if(!patternModal.classList.contains("open")){
+      document.body.style.overflow = "";
+    }
+  }
+
+  $("ldm50Close").addEventListener("click",closeLdm50);
+
+  $("ldm50Pricing").addEventListener("click",closeLdm50);
+
+  ldm50Popup.addEventListener("click",event=>{
+    if(event.target === ldm50Popup) closeLdm50();
   });
 
-  /* Show the introductory promotion once per browser when storage is available. */
-  function scheduleIntro(){
-    let alreadySeen = false;
-    try{alreadySeen = localStorage.getItem("ldu_intro_seen_v2") === "1"}catch(e){}
-    if(alreadySeen) return;
+  /* COPY LDM50 CODE */
+  $("copyLdm50").addEventListener("click",async()=>{
+    const code = "LDM50";
+    const button = $("copyLdm50");
 
-    setTimeout(()=>{
-      if(patternModal.classList.contains("open")) return;
-      try{localStorage.setItem("ldu_intro_seen_v2","1")}catch(e){}
-      openModal(promoModal);
-    },9000);
-  }
-  scheduleIntro();
+    try{
+      if(navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(code);
+      }else{
+        const temp = document.createElement("textarea");
+        temp.value = code;
+        temp.setAttribute("readonly","");
+        temp.style.position = "fixed";
+        temp.style.opacity = "0";
+        document.body.appendChild(temp);
+        temp.select();
+        const copied = document.execCommand("copy");
+        document.body.removeChild(temp);
 
-  /* Reveal effects */
+        if(!copied) throw new Error("Copy unavailable");
+      }
+
+      button.textContent = "✓ CODE COPIED!";
+      showToast("LDM50 copied. Paste it at Whop checkout.");
+
+      setTimeout(()=>{
+        button.textContent = "COPY DISCOUNT CODE";
+      },2500);
+
+    }catch(error){
+      showToast("Copy unavailable. Please select and copy LDM50 manually.");
+    }
+  });
+
+  /* ESCAPE KEY */
+  document.addEventListener("keydown",event=>{
+    if(event.key === "Escape"){
+      if(patternModal.classList.contains("open")) closeModal(patternModal);
+      if(ldm50Popup.classList.contains("show")) closeLdm50();
+    }
+  });
+
+  /* REVEAL EFFECTS */
   const revealItems = document.querySelectorAll(".reveal");
+
   if("IntersectionObserver" in window){
     const observer = new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
@@ -901,6 +1133,7 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
         }
       });
     },{threshold:.10});
+
     revealItems.forEach(item=>observer.observe(item));
   }else{
     revealItems.forEach(item=>item.classList.add("visible"));
@@ -908,5 +1141,6 @@ footer{border-top:1px solid var(--line);background:rgba(0,0,0,.23);padding:44px 
 
 })();
 </script>
+
 </body>
 </html>
