@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -138,17 +137,22 @@ button:focus-visible,a:focus-visible,summary:focus-visible{
 
 /* ANNOUNCEMENT */
 .announcement{
-  padding:9px 15px;
+  padding:10px 15px;
   text-align:center;
   background:#171717;
   border-bottom:1px solid rgba(255,255,255,.12);
   font-size:.68rem;
   font-weight:800;
-  letter-spacing:.15em;
+  letter-spacing:.12em;
   text-transform:uppercase;
   color:#f4f1ea;
 }
 .announcement span{color:#ff6979}
+.announcement a{
+  color:#ff6979;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
 
 /* NAVIGATION */
 header{
@@ -972,6 +976,11 @@ footer .brand-mark{background:var(--red)}
 .promo-strip h3{font-size:1.1rem;margin-bottom:5px}
 .promo-strip p{font-size:.82rem;color:#77716b}
 .promo-strip strong{color:#b9162a}
+.promo-actions{display:flex;gap:9px;flex-wrap:wrap}
+.promo-copy{
+  border:0;
+  cursor:pointer;
+}
 
 /* COMMUNITY */
 .community-panel{
@@ -1140,7 +1149,7 @@ footer .brand-mark{background:var(--red)}
 
 @media(max-width:480px){
   .container{width:calc(100% - 26px)}
-  .announcement{font-size:.58rem;letter-spacing:.09em}
+  .announcement{font-size:.58rem;letter-spacing:.07em}
   .brand-mark{width:39px;height:39px;border-radius:12px}
   .brand-name{font-size:.66rem}
   .brand-name small{font-size:.53rem}
@@ -1173,6 +1182,8 @@ footer .brand-mark{background:var(--red)}
   .modal{padding:24px 20px}
   .promo-strip{align-items:flex-start;flex-direction:column}
   .promo-strip .btn{width:100%}
+  .promo-actions{width:100%}
+  .promo-actions .btn{width:100%}
 }
 </style>
 </head>
@@ -1189,8 +1200,9 @@ footer .brand-mark{background:var(--red)}
 </div>
 
 <div class="announcement">
-  <span>LIQUIDITY DISPLACEMENT UNIVERSITY™</span>
-  &nbsp;·&nbsp; A NEW STANDARD FOR PATTERN-FOCUSED LEARNING
+  <span>LAUNCH OFFER · 50% OFF</span>
+  &nbsp;·&nbsp; FIRST 50 STUDENTS · CODE
+  <a href="#pricing">LDM50 · COPY YOUR CODE</a>
 </div>
 
 <header>
@@ -1473,13 +1485,17 @@ footer .brand-mark{background:var(--red)}
 
     <div class="promo-strip reveal">
       <div>
-        <h3>Founding Members Promotion — 50% OFF</h3>
-        <p>Use discount code <strong>LDM50</strong> at Whop checkout. Limited to the first 50 successful redemptions.</p>
+        <h3>LAUNCHING OFFER — 50% OFF</h3>
+        <p>Our launch promotion is for the <strong>first 50 students</strong>. Copy code <strong>LDM50</strong> and enter it at eligible Whop checkout.</p>
+        <p style="margin-top:8px;font-size:.72rem">One launch offer. First 50 successful redemptions. Subject to Whop discount configuration and eligibility.</p>
       </div>
-      <a class="btn glass-btn" href="#community">Explore LDU ↗</a>
+      <div class="promo-actions">
+        <button class="btn primary promo-copy" id="copyLdm50Inline" type="button">COPY LDM50 ↗</button>
+        <a class="btn glass-btn" href="https://whop.com/checkout/plan_J8We2VYRgzsnz" target="_blank" rel="noopener noreferrer">VIP CHECKOUT</a>
+      </div>
     </div>
 
-    <p class="section-footnote">Discount code LDM50 must be configured and limited to 50 redemptions in Whop. The code is not automatically applied by this website. Final prices, trial conditions and billing dates are determined by the Whop checkout.</p>
+    <p class="section-footnote">Discount code LDM50 must be configured in Whop with a 50-redemption limit and the correct eligible products. The code is not automatically applied by this website. Final discount, prices, trial conditions and billing dates are determined by the Whop checkout.</p>
   </div>
 </section>
 
@@ -1557,7 +1573,8 @@ footer .brand-mark{background:var(--red)}
       </div>
 
       <div class="actions" style="margin-top:23px">
-        <a class="btn primary" href="mailto:liquiditydisplacement@gmail.com?subject=Founder%20and%20LDU%20Enquiry">Contact LDU ↗</a>
+        <a class="btn primary" href="founder.html">MEET THE FOUNDER ↗</a>
+        <a class="btn glass-btn" href="mailto:liquiditydisplacement@gmail.com?subject=Founder%20and%20LDU%20Enquiry">Contact LDU</a>
         <a class="btn glass-btn" href="register.html">Join LDU</a>
       </div>
     </div>
@@ -1618,7 +1635,7 @@ footer .brand-mark{background:var(--red)}
       <details><summary>Which patterns can I explore?</summary><p>The public homepage introduces the Liquidity Displacement Methodology™, Smart Money Withdraw Pattern, Origin 4 Pattern, Rejection Architecture Pattern and Daily Reload Pattern.</p></details>
       <details><summary>Where can I purchase VIP trade alerts?</summary><p>Use the VIP Real-Time Trade Alerts checkout button in the membership section. The checkout is processed through Whop.</p></details>
       <details><summary>How does the mentorship free trial work?</summary><p>The mentorship checkout advertises a 3-day free trial. Review the Whop checkout carefully for the billing date, recurring payment amount and cancellation terms before confirming.</p></details>
-      <details><summary>How do I use the LDM50 discount?</summary><p>Copy the code LDM50 from the promotion popup and paste it into the discount-code field at Whop checkout. The promotion is limited to the first 50 successful redemptions, subject to the discount configuration in Whop.</p></details>
+      <details><summary>How do I use the LDM50 discount?</summary><p>Copy the code LDM50 from the promotion popup or pricing section and paste it into the discount-code field at eligible Whop checkout. The promotion is limited to the first 50 successful redemptions, subject to the discount configuration in Whop.</p></details>
       <details><summary>Does registration automatically give me paid course access?</summary><p>No. Creating an account and purchasing a course are different steps. Paid access should be granted only after the relevant payment and membership have been verified.</p></details>
       <details><summary>Are the course videos and PDFs available now?</summary><p>Resources should only be described as available when they have actually been published and connected to the student portal. This homepage describes the intended learning experience without claiming that unconfigured features are live.</p></details>
       <details><summary>Does LDU guarantee profits or funded-account success?</summary><p>No. Trading carries a risk of loss. Education cannot guarantee profits, funded-account approval, payouts or any particular result. Results depend on many factors, and losses are possible.</p></details>
@@ -1664,6 +1681,7 @@ footer .brand-mark{background:var(--red)}
           <a href="#pricing">Membership</a>
           <a href="#community">Discord community</a>
           <a href="#founder">Founder</a>
+          <a href="founder.html">Meet the founder page</a>
           <a href="#benefits">Student experience</a>
         </div>
       </div>
@@ -1717,13 +1735,13 @@ footer .brand-mark{background:var(--red)}
     <button class="ldm50-close" id="ldm50Close" aria-label="Close discount promotion" type="button">×</button>
     <div class="ldm50-kicker">LIQUIDITY DISPLACEMENT UNIVERSITY™</div>
     <div class="ldm50-discount">50% OFF</div>
-    <h2 id="ldm50Title">Founding Members Offer</h2>
-    <p>Get 50% off your eligible membership with our exclusive founding-member discount.</p>
-    <p>Your discount code:</p>
+    <h2 id="ldm50Title">LDU Launching Offer</h2>
+    <p>Celebrate the launch of Liquidity Displacement University™ with an exclusive 50% discount for the first 50 students.</p>
+    <p>Your launch discount code:</p>
     <div class="ldm50-code" id="ldm50Code">LDM50</div>
     <button class="ldm50-copy" id="copyLdm50" type="button">COPY DISCOUNT CODE</button>
     <a class="ldm50-checkout" href="#pricing" id="ldm50Pricing">View membership and Whop checkout</a>
-    <p class="ldm50-limit">Limited to the first 50 successful redemptions. Enter the code at Whop checkout. Terms and eligibility apply.</p>
+    <p class="ldm50-limit">Limited to the first 50 successful redemptions. Enter the code at eligible Whop checkout. Terms and eligibility apply.</p>
   </div>
 </div>
 
@@ -1782,9 +1800,8 @@ footer .brand-mark{background:var(--red)}
 
   $("year").textContent = new Date().getFullYear();
 
-  /* LOADER: CLOSE AFTER PAGE LOAD OR SHORT FALLBACK */
+  /* LOADER */
   document.body.style.overflow = "hidden";
-
   let loaderClosed = false;
 
   function hideLoader(){
@@ -1928,10 +1945,9 @@ footer .brand-mark{background:var(--red)}
     if(event.target === ldm50Popup) closeLdm50();
   });
 
-  /* COPY DISCOUNT CODE */
-  $("copyLdm50").addEventListener("click",async()=>{
+  /* COPY DISCOUNT CODE FROM POPUP OR PRICING SECTION */
+  async function copyLdm50Code(button){
     const code = "LDM50";
-    const button = $("copyLdm50");
 
     try{
       if(navigator.clipboard && window.isSecureContext){
@@ -1944,22 +1960,32 @@ footer .brand-mark{background:var(--red)}
         temp.style.opacity = "0";
         document.body.appendChild(temp);
         temp.select();
+
         const copied = document.execCommand("copy");
         document.body.removeChild(temp);
 
         if(!copied) throw new Error("Copy unavailable");
       }
 
+      const originalText = button.textContent;
       button.textContent = "✓ CODE COPIED!";
-      showToast("LDM50 copied. Paste it at Whop checkout.");
+      showToast("LDM50 copied. Paste it at eligible Whop checkout.");
 
       setTimeout(()=>{
-        button.textContent = "COPY DISCOUNT CODE";
+        button.textContent = originalText;
       },2500);
 
     }catch(error){
       showToast("Copy unavailable. Please select and copy LDM50 manually.");
     }
+  }
+
+  $("copyLdm50").addEventListener("click",function(){
+    copyLdm50Code(this);
+  });
+
+  $("copyLdm50Inline").addEventListener("click",function(){
+    copyLdm50Code(this);
   });
 
   /* ESCAPE KEY */
@@ -1992,4 +2018,4 @@ footer .brand-mark{background:var(--red)}
 </script>
 
 </body>
-</html>
+  </html>
