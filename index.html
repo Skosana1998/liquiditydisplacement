@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -290,7 +289,9 @@ footer .brand-mark{background:var(--red)}
 .community-panel h3{font-size:clamp(1.5rem,4vw,2.3rem);margin-bottom:12px;color:#f5f5f5}
 .community-panel p{max-width:650px;color:#aaa;font-size:.88rem;line-height:1.9}
 .community-icon{width:75px;height:75px;flex-shrink:0;border-radius:20px;display:grid;place-items:center;background:#5865F2;border:1px solid rgba(255,255,255,.2);padding:13px}
-.community-icon svg{width:100%;height:100%;display:block}
+.community-icon img{
+  width:100%;height:100%;object-fit:contain;display:block;
+}
 
 /* PARTNER RECOMMENDATIONS */
 .partner-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
@@ -301,7 +302,9 @@ footer .brand-mark{background:var(--red)}
   display:grid;place-items:center;padding:9px;
   border-radius:14px;background:#fff;border:1px solid rgba(255,255,255,.12);
 }
-.partner-logo svg{width:100%;height:100%;display:block}
+.partner-logo img{
+  width:100%;height:100%;object-fit:contain;display:block;
+}
 .partner-name{font:800 1.08rem Manrope,sans-serif;color:#fff;letter-spacing:-.035em}
 .partner-tag{font-size:.65rem;color:#ff7887;font-weight:800;letter-spacing:.10em;text-transform:uppercase;margin-top:4px}
 .partner-card p{font-size:.83rem;color:#aaa;line-height:1.85}
@@ -637,7 +640,7 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
-<!-- PLATFORM RECOMMENDATIONS: LOGOS ARE EMBEDDED SVG, NO IMAGE FILES NEEDED -->
+<!-- PLATFORM RECOMMENDATIONS: USING YOUR OWN PNG FILES -->
 <section class="section" id="recommendations">
   <div class="container">
     <div class="section-head reveal">
@@ -650,18 +653,8 @@ footer .brand-mark{background:var(--red)}
       <!-- BLUE GUARDIAN -->
       <article class="glass-card partner-card reveal">
         <div class="partner-top">
-          <div class="partner-logo" role="img" aria-label="Blue Guardian brand graphic">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="bgBlue" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#00A6E8"/>
-                  <stop offset="1" stop-color="#123B88"/>
-                </linearGradient>
-              </defs>
-              <path d="M50 5 L88 19 V48 C88 71 72 88 50 96 C28 88 12 71 12 48 V19 Z" fill="url(#bgBlue)"/>
-              <path d="M50 17 L76 27 V48 C76 64 66 77 50 84 C34 77 24 64 24 48 V27 Z" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
-              <text x="50" y="59" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" font-weight="900" fill="#fff">BG</text>
-            </svg>
+          <div class="partner-logo">
+            <img src="Blueguardian/Blueguardian.png" alt="Blue Guardian logo">
           </div>
           <div>
             <div class="partner-name">Blue Guardian</div>
@@ -681,11 +674,8 @@ footer .brand-mark{background:var(--red)}
       <!-- EXNESS -->
       <article class="glass-card partner-card reveal">
         <div class="partner-top">
-          <div class="partner-logo" role="img" aria-label="Exness brand graphic">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="100" height="100" rx="13" fill="#fff"/>
-              <path d="M20 25 H80 L68 39 H38 L48 50 H68 L56 64 H38 L48 75 H80" fill="none" stroke="#FF4B00" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/>
-            </svg>
+          <div class="partner-logo">
+            <img src="Exness/Exness.png" alt="Exness logo">
           </div>
           <div>
             <div class="partner-name">Exness</div>
@@ -723,10 +713,8 @@ footer .brand-mark{background:var(--red)}
         </div>
       </div>
 
-      <div class="community-icon" role="img" aria-label="Discord logo">
-        <svg viewBox="0 0 127 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path fill="#fff" d="M103.3 8.3A105 105 0 0 0 77.5.5l-3.2 6.6a97 97 0 0 0-22.6 0L48.5.5a105 105 0 0 0-25.8 7.8C6.4 32.3 2 55.8 4.2 79c10.8 8 21.2 12.8 31.4 15.8l7.6-12.5c-4.2-1.4-8.2-3.3-12-5.6l2.9-2.3c23.2 10.8 48.4 10.8 71.3 0l3 2.3c-3.8 2.3-7.8 4.2-12 5.6l7.6 12.5c10.2-3 20.6-7.8 31.4-15.8 2.6-27-4.4-50.3-22.1-70.7ZM43.8 61.2c-7 0-12.7-6.4-12.7-14.2s5.6-14.2 12.7-14.2 12.8 6.4 12.7 14.2c0 7.8-5.6 14.2-12.7 14.2Zm39.4 0c-7 0-12.7-6.4-12.7-14.2s5.6-14.2 12.7-14.2 12.8 6.4 12.7 14.2c0 7.8-5.6 14.2-12.7 14.2Z"/>
-        </svg>
+      <div class="community-icon">
+        <img src="Discord/Discord.png" alt="Discord logo">
       </div>
     </div>
   </div>
@@ -1118,4 +1106,4 @@ footer .brand-mark{background:var(--red)}
 </script>
 
 </body>
-</html>
+  </html>
