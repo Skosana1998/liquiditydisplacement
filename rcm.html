@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090909">
+<meta name="description" content="Liquidity Displacement University student VIP portal.">
 <title>Student Portal | Liquidity Displacement University™</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -26,295 +27,575 @@ body{
   margin:0;background:var(--bg);color:var(--white);
   font-family:Inter,Arial,sans-serif;
 }
-button,input,textarea{font:inherit}
+button,input{font:inherit}
 button{cursor:pointer}
+a{color:inherit}
 .app{display:flex;min-height:100vh}
 .sidebar{
-  width:250px;background:#0d0d0d;border-right:1px solid var(--line);
-  padding:25px 17px;position:fixed;inset:0 auto 0 0;z-index:5;
+  width:250px;background:#0d0d0d;
+  border-right:1px solid var(--line);
+  padding:25px 17px;position:fixed;
+  inset:0 auto 0 0;z-index:5;
   display:flex;flex-direction:column;
 }
 .brand{padding:8px 10px 28px}
-.brand strong{font-size:17px;letter-spacing:1px}
-.brand span{display:block;color:var(--gold);font-size:10px;margin-top:7px;letter-spacing:2px}
-.nav-label{font-size:10px;color:#777;letter-spacing:2px;padding:12px}
-.nav button{
-  width:100%;border:0;background:transparent;color:#aaa;text-align:left;
-  padding:13px 12px;border-radius:9px;margin:3px 0;font-size:13px;
+.brand strong{font-size:20px;letter-spacing:2px}
+.brand strong span{color:var(--red)}
+.brand>span{
+  display:block;color:var(--gold);
+  font-size:10px;margin-top:7px;letter-spacing:2px
 }
-.nav button.active,.nav button:hover{background:#211113;color:#fff}
+.nav-label{
+  font-size:10px;color:#777;
+  letter-spacing:2px;padding:12px
+}
+.nav button{
+  width:100%;border:0;background:transparent;
+  color:#aaa;text-align:left;padding:13px 12px;
+  border-radius:9px;margin:3px 0;font-size:13px;
+  transition:.2s;
+}
+.nav button.active,.nav button:hover{
+  background:#211113;color:#fff
+}
 .nav button.active{border-left:3px solid var(--red)}
 .sidebar-bottom{margin-top:auto}
-.main{margin-left:250px;width:calc(100% - 250px);padding:30px}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:30px}
+.main{
+  margin-left:250px;width:calc(100% - 250px);
+  padding:30px;min-width:0
+}
+.topbar{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:15px;margin-bottom:30px
+}
 .topbar h1{font-size:24px;margin:0}
 .topbar p{color:var(--muted);font-size:12px;margin:7px 0 0}
-.user-pill{border:1px solid var(--line);padding:10px 14px;border-radius:30px;font-size:12px}
+.user-pill{
+  border:1px solid var(--line);padding:10px 14px;
+  border-radius:30px;font-size:12px;
+  max-width:220px;overflow:hidden;text-overflow:ellipsis
+}
 .page{display:none}
 .page.active{display:block}
 .hero{
   background:linear-gradient(120deg,#211012,#111 65%);
-  border:1px solid #422126;border-radius:17px;padding:30px;margin-bottom:22px;
+  border:1px solid #422126;border-radius:17px;
+  padding:30px;margin-bottom:22px;
+  position:relative;overflow:hidden
 }
-.eyebrow{font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.hero:after{
+  content:"LDU";position:absolute;right:20px;bottom:-25px;
+  font-size:100px;font-weight:900;color:#ffffff05;
+  pointer-events:none
+}
+.eyebrow{
+  font-size:10px;letter-spacing:3px;
+  color:var(--gold);text-transform:uppercase
+}
 .hero h2{font-size:30px;margin:12px 0}
-.hero p{color:#bbb;max-width:650px;line-height:1.7;font-size:13px}
-.btn{
-  border:0;border-radius:8px;padding:12px 17px;font-weight:700;
-  background:var(--red);color:white;font-size:12px;
+.hero p{
+  color:#bbb;max-width:650px;
+  line-height:1.7;font-size:13px
 }
-.btn.secondary{background:#252525;border:1px solid #383838}
+.btn{
+  border:0;border-radius:8px;padding:12px 17px;
+  font-weight:700;background:var(--red);
+  color:white;font-size:12px;display:inline-block;
+  text-decoration:none;transition:.2s
+}
+.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.btn.secondary{
+  background:#252525;border:1px solid #383838
+}
 .btn.gold{background:var(--gold);color:#111}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:22px}
+.grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:15px;margin-bottom:22px
+}
 .card{
   background:var(--panel);border:1px solid var(--line);
   border-radius:13px;padding:20px;margin-bottom:16px;
+  min-width:0
 }
 .stat small{color:var(--muted);font-size:11px}
 .stat h3{font-size:25px;margin:12px 0 5px}
 .stat p{font-size:11px;color:var(--muted);margin:0}
-.section-title{font-size:17px;margin:25px 0 15px}
-.course{
-  display:flex;justify-content:space-between;align-items:center;gap:15px;
-  border:1px solid var(--line);background:#111;border-radius:12px;
-  padding:17px;margin-bottom:10px;
+.section-title{font-size:17px;margin:20px 0 15px}
+.programme-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:16px;margin-bottom:20px
 }
-.course h3{font-size:14px;margin:0 0 7px}
-.course p{font-size:11px;color:var(--muted);margin:0}
-.tag{font-size:10px;color:var(--gold);border:1px solid #55472b;padding:6px 9px;border-radius:20px}
-.locked{opacity:.65}
-.progress-track{height:7px;background:#292929;border-radius:10px;overflow:hidden}
-.progress-fill{height:100%;background:var(--red);width:0%}
-label{display:block;color:#aaa;font-size:11px;margin:14px 0 7px}
-input,textarea{
-  width:100%;background:#0b0b0b;border:1px solid #333;color:white;
-  border-radius:8px;padding:12px;outline:none;
+.programme{
+  background:linear-gradient(145deg,#191919,#0e0e0e);
+  border:1px solid #343434;border-radius:15px;
+  padding:22px;position:relative;overflow:hidden
 }
-input:focus,textarea:focus{border-color:var(--red)}
-textarea{min-height:110px;resize:vertical}
-.status{font-size:11px;padding:6px 9px;border-radius:20px;background:#242424;color:#ccc}
+.programme.featured{border-color:#66232b}
+.programme h3{font-size:17px;margin:12px 0}
+.price{font-size:34px;font-weight:800;margin:10px 0}
+.programme p{
+  color:var(--muted);font-size:12px;line-height:1.7
+}
+.programme .btn{width:100%;text-align:center;margin-top:12px}
+.tag{
+  display:inline-block;font-size:10px;color:var(--gold);
+  border:1px solid #55472b;padding:6px 9px;
+  border-radius:20px
+}
+.status{
+  font-size:11px;padding:6px 9px;
+  border-radius:20px;background:#242424;color:#ccc;
+  display:inline-block
+}
 .status.active{color:var(--green);background:#10251b}
 .status.pending{color:var(--gold);background:#282214}
+.status.locked{color:#ff8585;background:#2a1517}
 .muted{color:var(--muted);font-size:12px;line-height:1.7}
-.notice{border:1px solid #44371e;background:#1c1810;color:#d9c38c;padding:14px;border-radius:9px;font-size:12px;line-height:1.6}
+.notice{
+  border:1px solid #44371e;background:#1c1810;
+  color:#d9c38c;padding:14px;border-radius:9px;
+  font-size:12px;line-height:1.7
+}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.vip-item{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:15px;
+  border:1px solid var(--line);background:#111;
+  border-radius:12px;padding:17px;margin-bottom:10px
+}
+.vip-item h3{font-size:14px;margin:0 0 7px}
+.vip-item p{font-size:11px;color:var(--muted);margin:0}
+label{
+  display:block;color:#aaa;
+  font-size:11px;margin:14px 0 7px
+}
+input{
+  width:100%;background:#0b0b0b;
+  border:1px solid #333;color:white;
+  border-radius:8px;padding:12px;outline:none
+}
+input:focus{border-color:var(--red)}
 .hidden{display:none!important}
 #loginScreen{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+  min-height:100vh;display:flex;
+  align-items:center;justify-content:center;padding:20px
 }
-.login-card{width:100%;max-width:420px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px}
+.login-card{
+  width:100%;max-width:420px;background:var(--panel);
+  border:1px solid var(--line);border-radius:16px;padding:28px
+}
 .login-card h1{font-size:23px}
-.login-card p{color:var(--muted);font-size:12px;line-height:1.6}
+.login-card p{
+  color:var(--muted);font-size:12px;line-height:1.6
+}
 #message{font-size:12px;margin-top:12px;color:var(--gold)}
+.certificate{
+  background:#111;border:1px solid var(--line);
+  border-radius:12px;padding:18px;margin-top:12px
+}
+.certificate h3{font-size:15px;margin:0 0 10px}
+.chat-panel{
+  background:linear-gradient(135deg,#211012,#111);
+  border:1px solid #462127;border-radius:14px;
+  padding:24px
+}
+.chat-panel h3{margin-top:0}
+.chat-panel p{font-size:12px;color:#bbb;line-height:1.7}
 footer{color:#666;font-size:10px;padding:20px 0}
 @media(max-width:800px){
-  .sidebar{width:100%;height:auto;position:fixed;inset:auto 0 0 0;padding:8px;background:#0b0b0b;border-top:1px solid var(--line);border-right:0}
+  .sidebar{
+    width:100%;height:auto;position:fixed;
+    inset:auto 0 0 0;padding:8px;background:#0b0b0b;
+    border-top:1px solid var(--line);border-right:0
+  }
   .brand,.nav-label,.sidebar-bottom{display:none}
   .nav{display:flex;overflow-x:auto;gap:3px}
-  .nav button{white-space:nowrap;width:auto;font-size:10px;padding:12px 10px}
+  .nav button{
+    white-space:nowrap;width:auto;
+    font-size:10px;padding:12px 10px
+  }
   .main{margin:0;width:100%;padding:20px 14px 90px}
   .grid{grid-template-columns:1fr 1fr}
   .topbar h1{font-size:19px}
   .hero{padding:22px}
   .hero h2{font-size:24px}
 }
-@media(max-width:430px){.grid{grid-template-columns:1fr}.course{align-items:flex-start}}
+@media(max-width:520px){
+  .programme-grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .vip-item{align-items:flex-start;flex-direction:column}
+  .topbar{align-items:flex-start}
+  .user-pill{font-size:10px;max-width:135px}
+}
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-card">
     <div class="eyebrow">Liquidity Displacement University™</div>
     <h1>Student Portal</h1>
-    <p>Sign in to access your learning dashboard, courses and student account.</p>
+    <p>Sign in to access your LDU VIP dashboard, programme information and student account.</p>
+
     <form id="loginForm">
       <label>Email address</label>
       <input id="email" type="email" required placeholder="Your registered email">
+
       <label>Password</label>
       <input id="password" type="password" required placeholder="Your password">
-      <button class="btn" style="width:100%;margin-top:18px" type="submit">Sign In</button>
+
+      <button class="btn" style="width:100%;margin-top:18px" type="submit">
+        Sign In
+      </button>
     </form>
+
     <div id="message"></div>
-    <p>Not registered yet? Use the student registration page.</p>
+    <p>Not registered yet? Use the official student registration page.</p>
   </div>
 </div>
 
+<!-- PORTAL -->
 <div id="portal" class="app hidden">
 
 <aside class="sidebar">
   <div class="brand">
-    <strong>LDU <span style="display:inline;color:var(--red)">●</span></strong>
-    <span>STUDENT COMMAND CENTRE</span>
+    <strong>LDU <span>●</span></strong>
+    <span>VIP STUDENT CENTRE</span>
   </div>
 
   <div class="nav-label">STUDENT MENU</div>
+
   <nav class="nav">
     <button class="active" data-page="overview">⌂ Overview</button>
-    <button data-page="courses">▤ My Courses</button>
-    <button data-page="progress">◴ My Progress</button>
+    <button data-page="vip">◇ My VIP Access</button>
+    <button data-page="chat">◉ Live Chat</button>
     <button data-page="certificates">♧ Certificates</button>
-    <button data-page="fees">◇ Programme Fees</button>
-    <button data-page="submissions">↑ Submissions</button>
+    <button data-page="fees">R Programme Fees</button>
     <button data-page="account">⚙ My Account</button>
   </nav>
 
   <div class="sidebar-bottom">
-    <button class="btn secondary" style="width:100%" id="logoutBtn">Sign Out</button>
+    <button class="btn secondary" style="width:100%" id="logoutBtn">
+      Sign Out
+    </button>
   </div>
 </aside>
 
 <main class="main">
-  <header class="topbar">
-    <div>
-      <h1 id="pageHeading">Overview</h1>
-      <p>Liquidity Displacement University™ | Student portal</p>
-    </div>
-    <div class="user-pill" id="userEmail">Student account</div>
-  </header>
 
-  <section class="page active" id="page-overview">
-    <div class="hero">
-      <div class="eyebrow">Welcome to LDU</div>
-      <h2>Learn the language of the market.</h2>
-      <p>Your education journey starts here. Access your programme, follow your learning progress, submit your work and track your certificate status.</p>
-      <button class="btn" onclick="showPage('courses')">Explore My Courses</button>
-    </div>
+<header class="topbar">
+  <div>
+    <h1 id="pageHeading">Overview</h1>
+    <p>Liquidity Displacement University™ | VIP Student Portal</p>
+  </div>
+  <div class="user-pill" id="userEmail">Student account</div>
+</header>
 
-    <div class="grid">
-      <div class="card stat">
-        <small>MEMBERSHIP STATUS</small>
-        <h3 id="overviewMembership">Checking</h3>
-        <p>Your programme access</p>
-      </div>
-      <div class="card stat">
-        <small>COURSES AVAILABLE</small>
-        <h3 id="courseCount">—</h3>
-        <p>Courses in your portal</p>
-      </div>
-      <div class="card stat">
-        <small>LEARNING PROGRESS</small>
-        <h3 id="overviewProgress">0%</h3>
-        <p>Completed lessons</p>
-      </div>
+<!-- OVERVIEW -->
+<section class="page active" id="page-overview">
+
+  <div class="hero">
+    <div class="eyebrow">Welcome to LDU</div>
+    <h2>Your access. Your development. Your journey.</h2>
+    <p>
+      Welcome to the Liquidity Displacement University™ student portal.
+      Manage your VIP programme access, connect with student support
+      and access your educational resources through Whop.
+    </p>
+    <button class="btn" onclick="showPage('vip')">
+      View My VIP Access
+    </button>
+  </div>
+
+  <div class="grid">
+    <div class="card stat">
+      <small>MEMBERSHIP STATUS</small>
+      <h3 id="overviewMembership">Checking</h3>
+      <p>Your LDU membership</p>
     </div>
 
-    <div class="card">
-      <h3 class="section-title" style="margin-top:0">Your membership</h3>
-      <p class="muted" id="membershipMessage">Checking your membership record...</p>
-      <button class="btn gold" onclick="showPage('fees')">View Programme Fee</button>
+    <div class="card stat">
+      <small>VIP PROGRAMMES</small>
+      <h3 id="overviewAccess">0</h3>
+      <p>Active purchased programmes</p>
     </div>
 
-    <div class="card">
-      <h3 class="section-title" style="margin-top:0">Continue learning</h3>
-      <div id="overviewCourses" class="muted">Loading courses...</div>
+    <div class="card stat">
+      <small>CERTIFICATE STATUS</small>
+      <h3 id="overviewCertificate">Checking</h3>
+      <p>Six-month eligibility policy</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="section-title" style="margin-top:0">Your VIP membership</h3>
+    <p class="muted" id="membershipMessage">
+      Checking your membership record...
+    </p>
+    <button class="btn gold" onclick="showPage('vip')">
+      Manage VIP Access
+    </button>
+  </div>
+
+  <div class="card">
+    <h3 class="section-title" style="margin-top:0">Your programmes</h3>
+    <div id="overviewVIP" class="muted">
+      Loading your VIP access...
+    </div>
+  </div>
+
+  <div class="chat-panel">
+    <div class="eyebrow">LDU Student Support</div>
+    <h3>Need assistance?</h3>
+    <p>
+      Connect with the LDU support assistant through live chat
+      if you need assistance with your student account or membership.
+    </p>
+    <button class="btn" onclick="openLiveChat()">
+      Open Live Chat
+    </button>
+  </div>
+
+  <div class="notice" style="margin-top:18px">
+    Educational videos, lessons, trading tools and purchased VIP
+    resources are provided through Whop. Your LDU portal is used
+    for account management, VIP access information and student support.
+  </div>
+
+</section>
+
+<!-- VIP ACCESS -->
+<section class="page" id="page-vip">
+
+  <div class="hero">
+    <div class="eyebrow">Your purchased programmes</div>
+    <h2>My VIP Access</h2>
+    <p>
+      Your purchased programme determines which VIP resources
+      are available to you through Whop.
+    </p>
+    <a class="btn gold" href="https://whop.com/" target="_blank" rel="noopener">
+      Open Whop
+    </a>
+  </div>
+
+  <div class="card">
+    <h3 class="section-title" style="margin-top:0">
+      Active programme access
+    </h3>
+    <div id="vipAccessList" class="muted">
+      Checking your purchases...
+    </div>
+  </div>
+
+  <div class="notice">
+    Your educational content and tools are hosted on Whop.
+    Sign in to Whop using the email address associated with your purchase.
+    Whop controls access to the products you have purchased.
+  </div>
+
+</section>
+
+<!-- LIVE CHAT -->
+<section class="page" id="page-chat">
+
+  <div class="hero">
+    <div class="eyebrow">Student communication</div>
+    <h2>Live Student Support</h2>
+    <p>
+      Have a question about your LDU account, membership or access?
+      Connect with the LDU support assistant.
+    </p>
+  </div>
+
+  <div class="chat-panel">
+    <h3>Chat with LDU Support</h3>
+    <p>
+      Open the chat window to communicate with the LDU support assistant.
+      For payment verification or certificate administration,
+      contact the LDU administration team.
+    </p>
+    <button class="btn" onclick="openLiveChat()">
+      Start Live Chat
+    </button>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Student community</h3>
+    <p class="muted">
+      Join the official LDU student community for announcements
+      and community communication.
+    </p>
+    <a class="btn secondary"
+       href="https://discord.gg/bB2dDFV7P"
+       target="_blank" rel="noopener">
+      Join Discord
+    </a>
+  </div>
+
+</section>
+
+<!-- CERTIFICATES -->
+<section class="page" id="page-certificates">
+
+  <div class="hero">
+    <div class="eyebrow">Achievement centre</div>
+    <h2>My Certificates</h2>
+    <p>
+      LDU certificates become eligible for consideration after
+      six months of membership.
+    </p>
+  </div>
+
+  <div class="notice">
+    CERTIFICATE POLICY: A minimum of six months of membership is
+    required before certificate eligibility. Reaching six months
+    does not automatically issue a certificate. Only authorised
+    LDU administration can approve and release certificates.
+    Students cannot issue or approve their own certificates.
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 class="section-title" style="margin-top:0">
+      Your certificate eligibility
+    </h3>
+
+    <p class="muted" id="certificateEligibility">
+      Checking your membership period...
+    </p>
+
+    <div id="certificateList">
+      Loading certificate records...
+    </div>
+  </div>
+
+</section>
+
+<!-- FEES -->
+<section class="page" id="page-fees">
+
+  <div class="hero">
+    <div class="eyebrow">LDU enrolment</div>
+    <h2>Choose Your Programme</h2>
+    <p>
+      Select the LDU programme that matches your educational needs.
+      Purchases and educational access are handled through Whop.
+    </p>
+  </div>
+
+  <div class="programme-grid">
+
+    <div class="programme featured">
+      <span class="tag">MENTORSHIP PROGRAMME</span>
+      <h3>LDU Mentorship</h3>
+      <div class="price">R2,500</div>
+      <p>
+        Access the LDU mentorship programme and its associated
+        educational resources through Whop after purchase.
+      </p>
+      <a class="btn" id="mentorshipCheckout"
+         href="#" target="_blank" rel="noopener">
+        Enrol in Mentorship
+      </a>
     </div>
 
-    <div class="notice">Official LDU student support: <a href="https://discord.gg/bB2dDFV7P" target="_blank" style="color:var(--gold)">Join the student community</a>.</div>
-  </section>
+    <div class="programme">
+      <span class="tag">VIP SIGNALS</span>
+      <h3>LDU VIP Signals</h3>
+      <div class="price">R1,500</div>
+      <p>
+        Access the LDU VIP Signals product and its associated
+        resources through Whop after purchase.
+      </p>
+      <a class="btn gold" id="signalsCheckout"
+         href="#" target="_blank" rel="noopener">
+        Join VIP Signals
+      </a>
+    </div>
 
-  <section class="page" id="page-courses">
-    <div class="hero">
-      <div class="eyebrow">Your education</div>
-      <h2>My Courses</h2>
-      <p>Access available lessons and continue developing your understanding of market patterns.</p>
-    </div>
-    <div id="courseList">Loading courses...</div>
-  </section>
+  </div>
 
-  <section class="page" id="page-progress">
-    <div class="card">
-      <div class="eyebrow">Learning analytics</div>
-      <h2>My Progress</h2>
-      <p class="muted">Your progress is based on lesson records saved to your student account.</p>
-      <h3 id="progressNumber">0%</h3>
-      <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
-      <p class="muted" id="progressDetails">Loading your progress...</p>
-    </div>
-  </section>
+  <div class="notice">
+    IMPORTANT: Payment is processed through Whop.
+    Your product access is subject to successful payment and
+    Whop membership verification. Returning from checkout
+    does not itself confirm payment.
+  </div>
 
-  <section class="page" id="page-certificates">
-    <div class="hero">
-      <div class="eyebrow">Achievement centre</div>
-      <h2>My Certificates</h2>
-      <p>Track your certificate status and view certificates released by LDU administration.</p>
-    </div>
-    <div class="notice">Certificates are reviewed and issued by LDU administration only. Students cannot approve or issue their own certificates.</div>
-    <div class="card" style="margin-top:16px" id="certificateList">Loading certificate status...</div>
-  </section>
+</section>
 
-  <section class="page" id="page-fees">
-    <div class="hero">
-      <div class="eyebrow">Programme enrolment</div>
-      <h2>Invest in your education.</h2>
-      <p>One programme. One once-off payment. Access to the LDU learning experience after payment verification.</p>
-    </div>
-    <div class="card">
-      <div class="eyebrow">LDU Programme</div>
-      <h2 style="font-size:35px;margin:12px 0">R5,000</h2>
-      <p class="muted">Once-off programme fee. No monthly payment option is displayed here.</p>
-      <ul class="muted">
-        <li>Access to paid programme lessons after verification</li>
-        <li>Student learning dashboard</li>
-        <li>Progress tracking</li>
-        <li>Student submissions</li>
-        <li>Certificate review by administration</li>
-      </ul>
-      <button class="btn gold" id="checkoutBtn" style="width:100%;margin-top:12px">Enrol Now — R5,000</button>
-      <p class="muted" style="margin-top:12px">You will be redirected to the official Whop checkout.</p>
-    </div>
-    <div class="notice">Important: Your membership will only become active after LDU verifies your payment. Returning from checkout does not automatically unlock courses.</div>
-  </section>
+<!-- ACCOUNT -->
+<section class="page" id="page-account">
 
-  <section class="page" id="page-submissions">
-    <div class="hero">
-      <div class="eyebrow">Student work</div>
-      <h2>Trading Submissions</h2>
-      <p>Submit your trading performance and reflections for review.</p>
-    </div>
-    <div class="card">
-      <form id="submissionForm">
-        <label>Submission title</label>
-        <input id="submissionTitle" required placeholder="Example: Weekly trading review">
-        <label>Describe your submission</label>
-        <textarea id="submissionText" required placeholder="Explain your trade, observations or learning..."></textarea>
-        <label>Trading screenshot (optional)</label>
-        <input id="submissionFile" type="file" accept="image/*">
-        <button class="btn" type="submit" style="margin-top:16px">Submit Work</button>
-      </form>
-      <p class="muted" id="submissionMessage"></p>
-    </div>
-    <div class="card">
-      <h3>Previous submissions</h3>
-      <div id="submissionList" class="muted">Loading submissions...</div>
-    </div>
-  </section>
+  <div class="card">
+    <div class="eyebrow">Personal details</div>
+    <h2>My Account</h2>
 
-  <section class="page" id="page-account">
-    <div class="card">
-      <div class="eyebrow">Personal details</div>
-      <h2>My Account</h2>
-      <label>Email address</label>
-      <input id="accountEmail" disabled>
-      <label>Display name</label>
-      <input id="displayName" placeholder="Your name">
-      <button class="btn" id="saveProfile" style="margin-top:16px">Save Changes</button>
-      <p class="muted" id="accountMessage"></p>
-    </div>
-  </section>
+    <label>Email address</label>
+    <input id="accountEmail" disabled>
 
-  <footer>© 2026 Liquidity Displacement University™. All rights reserved.</footer>
+    <label>Display name</label>
+    <input id="displayName" placeholder="Your name">
+
+    <button class="btn" id="saveProfile" style="margin-top:16px">
+      Save Changes
+    </button>
+
+    <p class="muted" id="accountMessage"></p>
+  </div>
+
+  <div class="card">
+    <h3>Account information</h3>
+    <p class="muted">
+      Your LDU student account provides access to your portal.
+      Your purchased educational products and resources are
+      managed separately through Whop.
+    </p>
+  </div>
+
+  <button class="btn secondary" id="logoutBtnMobile">
+    Sign Out
+  </button>
+
+</section>
+
+<footer>
+  © 2026 Liquidity Displacement University™. All rights reserved.
+</footer>
+
 </main>
 </div>
 
 <script>
-const SUPABASE_URL = "https://oordibcpeyvmlybmorhm.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_95GwON_auW2nW4hDUaQj2A_5Xi6NB60";
+/* =========================================
+   LDU CONFIGURATION
+========================================= */
 
-const WHOP_CHECKOUT_URL = "https://whop.com/checkout/plan_Y08CNHiQN3pya";
-const FREE_COURSE_ID = "ae50fd37-06e9-4697-a1a9-a15da1f881dd";
+const SUPABASE_URL =
+  "https://oordibcpeyvmlybmorhm.supabase.co";
+
+const SUPABASE_ANON_KEY =
+  "sb_publishable_95GwON_auW2nW4hDUaQj2A_5Xi6NB60";
+
+/*
+  REPLACE THESE TWO VALUES WITH YOUR NEW WHOP LINKS.
+*/
+const WHOP_MENTORSHIP_URL =
+  "PASTE_YOUR_MENTORSHIP_WHOP_CHECKOUT_LINK_HERE";
+
+const WHOP_SIGNALS_URL =
+  "PASTE_YOUR_VIP_SIGNALS_WHOP_CHECKOUT_LINK_HERE";
+
+/* Existing LDU student support */
+const DISCORD_URL =
+  "https://discord.gg/bB2dDFV7P";
+
+/* =========================================
+   SUPABASE INITIALISATION
+========================================= */
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
@@ -322,47 +603,118 @@ const supabaseClient = window.supabase.createClient(
 );
 
 let currentUser = null;
-let membershipActive = false;
-let courses = [];
-let progressRecords = [];
+let memberships = [];
+let activeMemberships = [];
+let certificates = [];
 let profileTable = "student_profiles";
+let membershipStartDate = null;
 
 const $ = id => document.getElementById(id);
+
+const VALID_STATUSES = [
+  "active",
+  "approved",
+  "paid",
+  "current"
+];
+
+/* =========================================
+   GENERAL FUNCTIONS
+========================================= */
 
 function showMessage(id, message, color) {
   const el = $(id);
   if (!el) return;
+
   el.textContent = message;
+
   if (color) el.style.color = color;
 }
 
+function isActive(record) {
+  return VALID_STATUSES.includes(
+    String(record.status || "").toLowerCase()
+  );
+}
+
 function showPage(name) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.querySelectorAll(".nav button").forEach(button => {
+    button.classList.remove("active");
+  });
 
   const page = $("page-" + name);
   if (page) page.classList.add("active");
 
-  const button = document.querySelector('[data-page="' + name + '"]');
+  const button = document.querySelector(
+    '[data-page="' + name + '"]'
+  );
+
   if (button) button.classList.add("active");
 
   const titles = {
     overview:"Overview",
-    courses:"My Courses",
-    progress:"My Progress",
+    vip:"My VIP Access",
+    chat:"Live Chat",
     certificates:"Certificates",
     fees:"Programme Fees",
-    submissions:"Submissions",
     account:"My Account"
   };
-  $("pageHeading").textContent = titles[name] || "Student Portal";
+
+  $("pageHeading").textContent =
+    titles[name] || "Student Portal";
 }
 
 document.querySelectorAll(".nav button").forEach(button => {
-  button.addEventListener("click", () => showPage(button.dataset.page));
+  button.addEventListener("click", () => {
+    showPage(button.dataset.page);
+  });
 });
 
+/* =========================================
+   WHOP CHECKOUT CONFIGURATION
+========================================= */
+
+function configureCheckout() {
+
+  const mentorship = $("mentorshipCheckout");
+  const signals = $("signalsCheckout");
+
+  if (
+    WHOP_MENTORSHIP_URL.startsWith("https://whop.com/")
+  ) {
+    mentorship.href = WHOP_MENTORSHIP_URL;
+  } else {
+    mentorship.href = "#";
+    mentorship.addEventListener("click", event => {
+      event.preventDefault();
+      alert("The Mentorship Whop checkout link has not been configured yet.");
+    });
+  }
+
+  if (
+    WHOP_SIGNALS_URL.startsWith("https://whop.com/")
+  ) {
+    signals.href = WHOP_SIGNALS_URL;
+  } else {
+    signals.href = "#";
+    signals.addEventListener("click", event => {
+      event.preventDefault();
+      alert("The VIP Signals Whop checkout link has not been configured yet.");
+    });
+  }
+}
+
+/* =========================================
+   PROFILE
+========================================= */
+
 async function loadProfile() {
+
   let result = await supabaseClient
     .from("student_profiles")
     .select("*")
@@ -370,421 +722,584 @@ async function loadProfile() {
     .maybeSingle();
 
   if (result.error) {
+
     result = await supabaseClient
       .from("profiles")
       .select("*")
       .eq("id", currentUser.id)
       .maybeSingle();
-    if (!result.error) profileTable = "profiles";
+
+    if (!result.error) {
+      profileTable = "profiles";
+    }
   }
 
   if (result.data) {
+
     $("displayName").value =
       result.data.full_name ||
       result.data.display_name ||
-      result.data.name || "";
+      result.data.name ||
+      "";
   }
-}
-
-async function loadMembership() {
-  const { data, error } = await supabaseClient
-    .from("memberships")
-    .select("*")
-    .eq("user_id", currentUser.id)
-    .order("created_at", { ascending:false })
-    .limit(1);
-
-  if (error) {
-    $("overviewMembership").textContent = "Unavailable";
-    $("membershipMessage").textContent =
-      "Membership information could not be loaded. Please contact LDU support.";
-    return;
-  }
-
-  const record = data && data.length ? data[0] : null;
-  const validStatuses = ["active","approved","paid","current"];
-
-  membershipActive = !!record &&
-    validStatuses.includes(String(record.status || "").toLowerCase());
-
-  $("overviewMembership").textContent = membershipActive ? "Active" : "Pending";
-  $("overviewMembership").style.color = membershipActive ? "var(--green)" : "var(--gold)";
-
-  $("membershipMessage").textContent = membershipActive
-    ? "Your membership record is marked active."
-    : "Your paid programme access is not currently active. Complete the R5,000 enrolment and wait for payment verification.";
-}
-
-async function loadCourses() {
-  const { data, error } = await supabaseClient
-    .from("courses")
-    .select("*")
-    .order("created_at", { ascending:true });
-
-  if (error) {
-    $("courseList").textContent = "Courses could not be loaded. Please contact support.";
-    $("overviewCourses").textContent = "Course information is currently unavailable.";
-    return;
-  }
-
-  courses = data || [];
-  $("courseCount").textContent = courses.length;
-
-  renderCourses();
-}
-
-function courseIsFree(course) {
-  return course.id === FREE_COURSE_ID ||
-    course.is_free === true ||
-    course.access_type === "free";
-}
-
-function renderCourses() {
-  const list = $("courseList");
-  const overview = $("overviewCourses");
-  list.innerHTML = "";
-  overview.innerHTML = "";
-
-  if (!courses.length) {
-    list.textContent = "No courses have been published yet.";
-    overview.textContent = "Your courses will appear here when published.";
-    return;
-  }
-
-  courses.forEach(course => {
-    const free = courseIsFree(course);
-    const unlocked = free || membershipActive;
-    const title = course.title || course.name || "LDU Course";
-    const description = course.description || "Explore this programme module.";
-
-    const card = document.createElement("div");
-    card.className = "course" + (!unlocked ? " locked" : "");
-
-    const info = document.createElement("div");
-    const heading = document.createElement("h3");
-    heading.textContent = title;
-    const paragraph = document.createElement("p");
-    paragraph.textContent = description;
-    info.append(heading, paragraph);
-
-    const action = document.createElement("div");
-    action.className = "row";
-
-    const tag = document.createElement("span");
-    tag.className = "tag";
-    tag.textContent = unlocked ? (free ? "FREE ACCESS" : "UNLOCKED") : "LOCKED";
-
-    const button = document.createElement("button");
-    button.className = "btn secondary";
-    button.textContent = unlocked ? "View Lessons" : "Unlock";
-    button.addEventListener("click", () => {
-      if (!unlocked) {
-        showPage("fees");
-        return;
-      }
-      openCourse(course.id, title);
-    });
-
-    action.append(tag, button);
-    card.append(info, action);
-    list.append(card);
-
-    const mini = document.createElement("div");
-    mini.className = "course";
-    mini.innerHTML = "";
-    const miniText = document.createElement("div");
-    const miniTitle = document.createElement("h3");
-    miniTitle.textContent = title;
-    const miniDesc = document.createElement("p");
-    miniDesc.textContent = unlocked ? "Available in your programme" : "Programme enrolment required";
-    miniText.append(miniTitle, miniDesc);
-    mini.append(miniText);
-    overview.append(mini);
-  });
-}
-
-async function openCourse(courseId, courseTitle) {
-  if (!membershipActive && courseId !== FREE_COURSE_ID) {
-    alert("This course requires an active LDU membership.");
-    showPage("fees");
-    return;
-  }
-
-  const { data, error } = await supabaseClient
-    .from("lessons")
-    .select("*")
-    .eq("course_id", courseId)
-    .order("created_at", { ascending:true });
-
-  if (error) {
-    alert("Lessons could not be loaded.");
-    return;
-  }
-
-  const lessonLines = (data || []).map((lesson, index) =>
-    (index + 1) + ". " + (lesson.title || lesson.name || "Lesson")
-  ).join("\n");
-
-  alert(courseTitle + "\n\n" + (lessonLines || "No lessons published yet.") +
-    "\n\nContact LDU support if you need help accessing lesson material.");
-}
-
-async function loadProgress() {
-  const { data, error } = await supabaseClient
-    .from("student_progress")
-    .select("*")
-    .eq("user_id", currentUser.id);
-
-  if (error) {
-    $("progressDetails").textContent = "Progress information is unavailable.";
-    return;
-  }
-
-  progressRecords = data || [];
-  const total = courses.length;
-  const completed = progressRecords.filter(item =>
-    item.completed === true ||
-    String(item.status || "").toLowerCase() === "completed"
-  ).length;
-
-  const percent = total ? Math.min(100, Math.round(completed / total * 100)) : 0;
-
-  $("overviewProgress").textContent = percent + "%";
-  $("progressNumber").textContent = percent + "%";
-  $("progressBar").style.width = percent + "%";
-  $("progressDetails").textContent = completed + " completed records out of " + total + " courses.";
-}
-
-async function loadCertificates() {
-  const { data, error } = await supabaseClient
-    .from("certificates")
-    .select("*")
-    .eq("user_id", currentUser.id)
-    .order("created_at", { ascending:false });
-
-  const box = $("certificateList");
-  box.innerHTML = "";
-
-  if (error) {
-    box.textContent = "Certificate status is currently unavailable.";
-    return;
-  }
-
-  if (!data || !data.length) {
-    box.textContent = "No certificate has been issued to your account yet. Certificates are released by LDU administration after review.";
-    return;
-  }
-
-  data.forEach(cert => {
-    const item = document.createElement("div");
-    item.className = "course";
-
-    const info = document.createElement("div");
-    const title = document.createElement("h3");
-    title.textContent = cert.title || cert.certificate_name || "LDU Certificate";
-    const status = document.createElement("p");
-    status.textContent = "Status: " + (cert.status || "Under review");
-    info.append(title, status);
-    item.append(info);
-
-    const state = String(cert.status || "").toLowerCase();
-    if (state === "issued" || state === "approved") {
-      const link = document.createElement("a");
-      link.className = "btn gold";
-      link.textContent = "View Certificate";
-      link.href = cert.certificate_url || cert.file_url || "#";
-      link.target = "_blank";
-      item.append(link);
-    } else {
-      const tag = document.createElement("span");
-      tag.className = "status pending";
-      tag.textContent = "Awaiting release";
-      item.append(tag);
-    }
-    box.append(item);
-  });
-}
-
-async function loadSubmissions() {
-  const { data, error } = await supabaseClient
-    .from("trading_submissions")
-    .select("*")
-    .eq("user_id", currentUser.id)
-    .order("created_at", { ascending:false });
-
-  const box = $("submissionList");
-  box.innerHTML = "";
-
-  if (error) {
-    box.textContent = "Your submissions could not be loaded.";
-    return;
-  }
-
-  if (!data || !data.length) {
-    box.textContent = "You have not submitted any work yet.";
-    return;
-  }
-
-  data.forEach(record => {
-    const item = document.createElement("div");
-    item.className = "course";
-    const info = document.createElement("div");
-    const title = document.createElement("h3");
-    title.textContent = record.title || "Trading submission";
-    const desc = document.createElement("p");
-    desc.textContent = record.description || record.content || "Submitted work";
-    info.append(title, desc);
-    const tag = document.createElement("span");
-    tag.className = "status";
-    tag.textContent = record.status || "Submitted";
-    item.append(info, tag);
-    box.append(item);
-  });
 }
 
 async function saveProfile() {
+
   const name = $("displayName").value.trim();
+
   if (!name) {
-    showMessage("accountMessage", "Please enter your display name.");
+    showMessage(
+      "accountMessage",
+      "Please enter your display name."
+    );
     return;
   }
 
   let result;
+
   if (profileTable === "student_profiles") {
+
     result = await supabaseClient
       .from("student_profiles")
       .update({ full_name:name })
       .eq("user_id", currentUser.id);
+
   } else {
+
     result = await supabaseClient
       .from("profiles")
       .update({ full_name:name })
       .eq("id", currentUser.id);
   }
 
-  showMessage("accountMessage", result.error
-    ? "Could not save your profile. Check your profile table permissions."
-    : "Your profile has been updated.");
+  showMessage(
+    "accountMessage",
+    result.error
+      ? "Could not save your profile. Check your profile permissions."
+      : "Your profile has been updated.",
+    result.error ? "#ff8585" : "var(--green)"
+  );
 }
 
-async function submitWork(event) {
-  event.preventDefault();
+/* =========================================
+   MEMBERSHIP AND VIP ACCESS
+========================================= */
 
-  if (!membershipActive) {
-    showMessage("submissionMessage", "An active membership is required to submit programme work.");
-    return;
+function getProgrammeName(record) {
+
+  const value = [
+    record.product_name,
+    record.product,
+    record.plan_name,
+    record.plan,
+    record.title,
+    record.name
+  ].filter(Boolean).join(" ").toLowerCase();
+
+  if (value.includes("mentorship")) {
+    return "LDU Mentorship";
   }
 
-  const title = $("submissionTitle").value.trim();
-  const description = $("submissionText").value.trim();
-  const file = $("submissionFile").files[0];
-  let screenshotUrl = null;
-
-  if (file) {
-    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-    const path = currentUser.id + "/" + Date.now() + "_" + safeName;
-
-    const upload = await supabaseClient.storage
-      .from("trading-results")
-      .upload(path, file);
-
-    if (upload.error) {
-      showMessage("submissionMessage", "Screenshot upload failed: " + upload.error.message);
-      return;
-    }
-    screenshotUrl = path;
+  if (
+    value.includes("signal") ||
+    value.includes("vip signals")
+  ) {
+    return "LDU VIP Signals";
   }
 
-  const { error } = await supabaseClient
-    .from("trading_submissions")
-    .insert({
-      user_id:currentUser.id,
-      title:title,
-      description:description,
-      screenshot_url:screenshotUrl,
-      status:"submitted"
-    });
+  return "LDU VIP Membership";
+}
+
+async function loadMembership() {
+
+  const { data, error } = await supabaseClient
+    .from("memberships")
+    .select("*")
+    .eq("user_id", currentUser.id)
+    .order("created_at", { ascending:true });
 
   if (error) {
-    showMessage("submissionMessage", "Submission failed: " + error.message);
+
+    $("overviewMembership").textContent = "Unavailable";
+
+    $("membershipMessage").textContent =
+      "Membership information could not be loaded. Please contact LDU support.";
+
+    $("vipAccessList").textContent =
+      "Unable to retrieve your membership information.";
+
+    $("overviewVIP").textContent =
+      "Membership information is unavailable.";
+
     return;
   }
 
-  $("submissionForm").reset();
-  showMessage("submissionMessage", "Your work has been submitted.");
-  loadSubmissions();
+  memberships = data || [];
+
+  activeMemberships = memberships.filter(isActive);
+
+  membershipStartDate = null;
+
+  if (activeMemberships.length) {
+
+    const dates = activeMemberships
+      .map(item => item.created_at)
+      .filter(Boolean)
+      .map(value => new Date(value))
+      .filter(date => !isNaN(date.getTime()))
+      .sort((a,b) => a-b);
+
+    membershipStartDate = dates.length ? dates[0] : null;
+  }
+
+  const active = activeMemberships.length > 0;
+
+  $("overviewMembership").textContent =
+    active ? "Active" : "Inactive";
+
+  $("overviewMembership").style.color =
+    active ? "var(--green)" : "var(--gold)";
+
+  $("overviewAccess").textContent =
+    activeMemberships.length;
+
+  $("membershipMessage").textContent = active
+    ? "Your LDU membership records show active programme access. Check your VIP products below and sign in to Whop to access your purchased resources."
+    : "No active LDU membership was found. Select a programme below to enrol through Whop.";
+
+  renderVIPAccess();
+
+  updateCertificateEligibility();
 }
+
+function renderVIPAccess() {
+
+  const list = $("vipAccessList");
+  const overview = $("overviewVIP");
+
+  list.innerHTML = "";
+  overview.innerHTML = "";
+
+  if (!activeMemberships.length) {
+
+    list.textContent =
+      "You do not currently have an active programme recorded. Visit Programme Fees to enrol.";
+
+    overview.textContent =
+      "No active VIP programme is currently recorded.";
+
+    return;
+  }
+
+  activeMemberships.forEach(record => {
+
+    const name = getProgrammeName(record);
+
+    const item = document.createElement("div");
+    item.className = "vip-item";
+
+    const info = document.createElement("div");
+
+    const title = document.createElement("h3");
+    title.textContent = name;
+
+    const description = document.createElement("p");
+    description.textContent =
+      "Your membership is recorded as active.";
+
+    const action = document.createElement("div");
+    action.className = "row";
+
+    const status = document.createElement("span");
+    status.className = "status active";
+    status.textContent = "ACTIVE";
+
+    const whop = document.createElement("a");
+    whop.className = "btn gold";
+    whop.href = "https://whop.com/";
+    whop.target = "_blank";
+    whop.rel = "noopener";
+    whop.textContent = "Open Whop";
+
+    info.append(title, description);
+    action.append(status, whop);
+    item.append(info, action);
+
+    list.append(item);
+
+    const mini = document.createElement("div");
+    mini.className = "vip-item";
+
+    const miniTitle = document.createElement("h3");
+    miniTitle.textContent = name;
+
+    const miniStatus = document.createElement("span");
+    miniStatus.className = "status active";
+    miniStatus.textContent = "ACTIVE";
+
+    mini.append(miniTitle, miniStatus);
+    overview.append(mini);
+  });
+}
+
+/* =========================================
+   SIX-MONTH CERTIFICATE ELIGIBILITY
+========================================= */
+
+function addSixMonths(date) {
+
+  const result = new Date(date);
+  const originalDay = result.getDate();
+
+  result.setMonth(result.getMonth() + 6);
+
+  /*
+    Prevent month-end rollover from creating
+    an incorrect eligibility date.
+  */
+  if (result.getDate() < originalDay) {
+    result.setDate(0);
+  }
+
+  return result;
+}
+
+function updateCertificateEligibility() {
+
+  const box = $("certificateEligibility");
+  const dashboard = $("overviewCertificate");
+
+  if (!membershipStartDate) {
+
+    box.textContent =
+      "Your membership start date is not available. Contact LDU administration to verify your eligibility date.";
+
+    dashboard.textContent = "Pending";
+
+    return;
+  }
+
+  const eligibilityDate =
+    addSixMonths(membershipStartDate);
+
+  const now = new Date();
+
+  if (now >= eligibilityDate) {
+
+    box.textContent =
+      "You have reached the six-month membership period. Your certificate is now eligible for administrative review. Only LDU administration can approve and release it.";
+
+    dashboard.textContent = "Eligible";
+
+    return;
+  }
+
+  const difference =
+    eligibilityDate.getTime() - now.getTime();
+
+  const days = Math.ceil(
+    difference / (1000 * 60 * 60 * 24)
+  );
+
+  box.textContent =
+    "Your six-month eligibility date is " +
+    eligibilityDate.toLocaleDateString("en-ZA") +
+    ". Approximately " + days +
+    " days remaining. Certificate release is controlled by LDU administration.";
+
+  dashboard.textContent = "In Progress";
+}
+
+/* =========================================
+   CERTIFICATE RECORDS
+========================================= */
+
+async function loadCertificates() {
+
+  const box = $("certificateList");
+
+  box.innerHTML = "";
+
+  const { data, error } = await supabaseClient
+    .from("certificates")
+    .select("*")
+    .eq("user_id", currentUser.id)
+    .order("created_at", { ascending:false });
+
+  if (error) {
+
+    box.textContent =
+      "Certificate information is currently unavailable. Please contact LDU administration.";
+
+    return;
+  }
+
+  certificates = data || [];
+
+  if (!certificates.length) {
+
+    const item = document.createElement("div");
+    item.className = "certificate";
+
+    const title = document.createElement("h3");
+    title.textContent = "No certificate released";
+
+    const message = document.createElement("p");
+    message.className = "muted";
+
+    const eligible = membershipStartDate &&
+      new Date() >= addSixMonths(membershipStartDate);
+
+    message.textContent = eligible
+      ? "You have reached the six-month eligibility period. Your certificate is awaiting LDU administrative review and release."
+      : "Your certificate will become eligible for consideration after six months of membership. Only LDU administration can release it.";
+
+    item.append(title, message);
+    box.append(item);
+
+    return;
+  }
+
+  const eligible = membershipStartDate &&
+    new Date() >= addSixMonths(membershipStartDate);
+
+  certificates.forEach(cert => {
+
+    const item = document.createElement("div");
+    item.className = "certificate";
+
+    const title = document.createElement("h3");
+    title.textContent =
+      cert.title ||
+      cert.certificate_name ||
+      "LDU Certificate";
+
+    const statusText = document.createElement("p");
+    statusText.className = "muted";
+
+    const state = String(cert.status || "").toLowerCase();
+
+    if (state === "issued" && eligible) {
+
+      statusText.textContent =
+        "Your certificate has been released by LDU administration.";
+
+      const link = document.createElement("a");
+
+      link.className = "btn gold";
+      link.textContent = "Download Certificate";
+
+      const url = cert.certificate_url || cert.file_url;
+
+      if (url && /^https:\/\//i.test(url)) {
+
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener";
+
+      } else {
+
+        link.textContent = "Certificate link unavailable";
+        link.className = "status pending";
+      }
+
+      item.append(title, statusText, link);
+
+    } else if (!eligible) {
+
+      statusText.textContent =
+        "Not yet eligible. Six months of membership are required before release.";
+
+      const tag = document.createElement("span");
+      tag.className = "status pending";
+      tag.textContent = "Six-month period pending";
+
+      item.append(title, statusText, tag);
+
+    } else {
+
+      statusText.textContent =
+        "Eligible for review. Awaiting release by LDU administration.";
+
+      const tag = document.createElement("span");
+      tag.className = "status pending";
+      tag.textContent = "Awaiting administration";
+
+      item.append(title, statusText, tag);
+    }
+
+    box.append(item);
+  });
+}
+
+/* =========================================
+   LIVE CHAT
+========================================= */
+
+function openLiveChat() {
+
+  if (
+    window.botpress &&
+    typeof window.botpress.open === "function"
+  ) {
+
+    window.botpress.open();
+
+  } else {
+
+    alert(
+      "The LDU chat assistant is loading. Please use the chat icon at the bottom of the screen."
+    );
+  }
+}
+
+/* =========================================
+   PORTAL REFRESH
+========================================= */
 
 async function refreshPortal() {
-  $("userEmail").textContent = currentUser.email || "Student";
-  $("accountEmail").value = currentUser.email || "";
+
+  $("userEmail").textContent =
+    currentUser.email || "Student";
+
+  $("accountEmail").value =
+    currentUser.email || "";
 
   await loadProfile();
+
   await loadMembership();
-  await loadCourses();
-  await loadProgress();
+
   await loadCertificates();
-  await loadSubmissions();
 }
 
+/* =========================================
+   SHOW PORTAL
+========================================= */
+
 async function showPortal(user) {
+
   currentUser = user;
+
   $("loginScreen").classList.add("hidden");
   $("portal").classList.remove("hidden");
+
   await refreshPortal();
 }
 
+/* =========================================
+   SESSION CHECK
+========================================= */
+
 async function checkSession() {
-  const { data } = await supabaseClient.auth.getSession();
+
+  const { data, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
   if (data.session) {
     await showPortal(data.session.user);
   }
 }
 
+/* =========================================
+   LOGIN
+========================================= */
+
 $("loginForm").addEventListener("submit", async event => {
+
   event.preventDefault();
+
   showMessage("message", "Signing in...");
 
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email:$("email").value.trim(),
-    password:$("password").value
-  });
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+
+      email: $("email").value.trim(),
+
+      password: $("password").value
+
+    });
 
   if (error) {
-    showMessage("message", error.message);
+
+    showMessage("message", error.message, "#ff8585");
+
     return;
   }
 
   await showPortal(data.user);
 });
 
-$("logoutBtn").addEventListener("click", async () => {
-  await supabaseClient.auth.signOut();
+/* =========================================
+   LOGOUT
+========================================= */
+
+async function logout() {
+
+  const { error } =
+    await supabaseClient.auth.signOut();
+
+  if (error) {
+    alert("Unable to sign out. Please try again.");
+    return;
+  }
+
   location.reload();
-});
+}
 
-$("checkoutBtn").addEventListener("click", () => {
-  window.open(WHOP_CHECKOUT_URL, "_blank", "noopener,noreferrer");
-});
+$("logoutBtn").addEventListener("click", logout);
+$("logoutBtnMobile").addEventListener("click", logout);
 
-$("saveProfile").addEventListener("click", saveProfile);
-$("submissionForm").addEventListener("submit", submitWork);
+/* =========================================
+   ACCOUNT SAVE
+========================================= */
 
-supabaseClient.auth.onAuthStateChange(async (event, session) => {
-  if (event === "SIGNED_IN" && session) {
-    await showPortal(session.user);
+$("saveProfile").addEventListener(
+  "click",
+  saveProfile
+);
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  async (event, session) => {
+
+    if (event === "SIGNED_IN" && session) {
+
+      await showPortal(session.user);
+
+    }
+
+    if (event === "SIGNED_OUT") {
+
+      location.reload();
+
+    }
   }
-  if (event === "SIGNED_OUT") {
-    location.reload();
-  }
-});
+);
 
+/* =========================================
+   START
+========================================= */
+
+configureCheckout();
 checkSession();
+
 </script>
 
 <!-- LDU AI CHATBOT - BOTPRESS -->
 <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/10/30/11/20261030113351-E9CCUMUE.js" defer></script>
+<script
+  src="https://files.bpcontent.cloud/2026/10/30/11/20261030113351-E9CCUMUE.js"
+  defer>
+</script>
 
 </body>
 </html>
