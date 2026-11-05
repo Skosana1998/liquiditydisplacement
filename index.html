@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -125,6 +126,11 @@ header{
 .navlinks a{transition:color .2s}
 .navlinks a:hover{color:var(--pink)}
 .navright{display:flex;align-items:center;gap:9px}
+.nav-logo{
+  width:43px;height:43px;flex-shrink:0;
+  object-fit:contain;display:block;
+  filter:drop-shadow(0 4px 12px rgba(224,0,32,.18));
+}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:9px;
   border:1px solid transparent;border-radius:999px;padding:12px 19px;
@@ -150,7 +156,16 @@ header{
 }
 
 /* HERO */
-.hero{padding:105px 0 90px;position:relative;overflow:hidden}
+.hero{padding:75px 0 90px;position:relative;overflow:hidden}
+.hero-main-logo{
+  display:flex;justify-content:center;align-items:center;
+  margin:0 auto 48px;position:relative;z-index:2;
+}
+.hero-main-logo img{
+  display:block;width:min(420px,85vw);max-height:220px;
+  object-fit:contain;
+  filter:drop-shadow(0 12px 35px rgba(224,0,32,.25));
+}
 .hero-grid{display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:60px}
 .kicker{
   display:inline-flex;align-items:center;gap:9px;
@@ -220,18 +235,12 @@ h1{font-size:clamp(3.1rem,6.7vw,6.2rem);font-weight:800;max-width:730px;color:#f
   box-shadow:0 15px 40px rgba(0,0,0,.3);
 }
 .university-founder-image img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-  object-position:center 25%;
+  width:100%;height:100%;display:block;
+  object-fit:cover;object-position:center 25%;
 }
 @media(max-width:480px){
   .university-founder-image{
-    width:260px;
-    height:270px;
-    margin-top:-12px;
-    margin-bottom:22px;
+    width:260px;height:270px;margin-top:-12px;margin-bottom:22px;
   }
 }
 
@@ -386,22 +395,15 @@ footer .brand-mark{background:var(--red)}
 .community-panel p{max-width:650px;color:#aaa;font-size:.88rem;line-height:1.9}
 .community-icon{
   width:65px;height:65px;flex-shrink:0;border-radius:20px;
-  display:grid;place-items:center;background:rgba(224,0,32,.13);
-  border:1px solid rgba(255,105,123,.2);padding:9px;
+  display:grid;place-items:center;background:#5865f2;
+  border:1px solid rgba(255,255,255,.2);padding:11px;
 }
 .community-logo{width:100%;height:100%;object-fit:contain}
 
 /* PARTNER RECOMMENDATIONS */
-.partner-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:16px;
-}
+.partner-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .partner-card{
-  padding:25px;
-  display:flex;
-  flex-direction:column;
-  gap:17px;
+  padding:25px;display:flex;flex-direction:column;gap:17px;
   border:1px solid rgba(255,255,255,.10);
   background:linear-gradient(145deg,#181818,#101010);
   border-radius:22px;
@@ -412,6 +414,12 @@ footer .brand-mark{background:var(--red)}
   object-fit:contain;padding:5px;border-radius:13px;
   background:#fff;border:1px solid rgba(255,255,255,.12);
 }
+.partner-brand-icon{
+  width:58px;height:58px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:15px;background:#fff;padding:8px;
+}
+.partner-brand-icon svg{width:100%;height:100%;display:block}
 .partner-name{font:800 1.08rem Manrope,sans-serif;color:#fff;letter-spacing:-.035em}
 .partner-tag{font-size:.65rem;color:#ff7887;font-weight:800;letter-spacing:.10em;text-transform:uppercase;margin-top:4px}
 .partner-card p{font-size:.83rem;color:#aaa;line-height:1.85}
@@ -429,6 +437,10 @@ footer .brand-mark{background:var(--red)}
 }
 .partner-code button:hover{background:#333}
 .partner-disclosure{font-size:.69rem!important;color:#777!important;line-height:1.8;margin-top:20px}
+.exness-wordmark{font:800 1.05rem Manrope,sans-serif;letter-spacing:-.06em;color:#fff}
+.exness-symbol{font-size:1.9rem;font-weight:900;line-height:1;color:#e00020}
+.blueguardian-wordmark{font:800 .83rem Manrope,sans-serif;letter-spacing:-.04em;color:#fff}
+.blueguardian-sub{color:#a9b8d8;font-size:.56rem;font-weight:800;letter-spacing:.12em;margin-top:3px}
 
 /* LDM50 POPUP */
 .ldm50-overlay{
@@ -479,20 +491,25 @@ footer .brand-mark{background:var(--red)}
   *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
 }
+
 @media(max-width:1100px){
   .navlinks{gap:10px;font-size:.69rem}
   .navright .member-button{display:none}
   .hero-grid{gap:35px}
-  .hero{padding-top:75px}
+  .hero{padding-top:65px}
   .benefit-grid{grid-template-columns:repeat(2,1fr)}
 }
+
 @media(max-width:760px){
   .container{width:calc(100% - 32px)}
   .nav{min-height:70px}
   .navlinks{display:none}
   .menu{display:block}
   .navright .glass-btn{display:none}
-  .hero{padding:62px 0 55px}
+  .nav-logo{width:35px;height:35px}
+  .hero{padding:48px 0 55px}
+  .hero-main-logo{margin-bottom:32px}
+  .hero-main-logo img{width:min(310px,82vw);max-height:160px}
   .hero-grid{grid-template-columns:1fr;gap:35px}
   h1{font-size:clamp(3rem,12vw,5rem)}
   .hero-copy{font-size:.94rem}
@@ -509,6 +526,7 @@ footer .brand-mark{background:var(--red)}
   .community-panel{align-items:flex-start;flex-direction:column}
   .partner-grid{grid-template-columns:1fr}
 }
+
 @media(max-width:480px){
   .container{width:calc(100% - 26px)}
   .announcement{font-size:.58rem;letter-spacing:.07em}
@@ -517,7 +535,10 @@ footer .brand-mark{background:var(--red)}
   .brand-name small{font-size:.53rem}
   .navright{gap:6px}
   .navright .primary{padding:10px 12px;font-size:.7rem}
-  .hero{padding-top:48px}
+  .nav-logo{width:31px;height:31px}
+  .hero{padding-top:40px}
+  .hero-main-logo{margin-bottom:28px}
+  .hero-main-logo img{width:min(280px,82vw);max-height:145px}
   .kicker{font-size:.59rem;letter-spacing:.08em}
   .actions .btn{width:100%}
   .hero-meta{gap:7px}
@@ -567,8 +588,8 @@ footer .brand-mark{background:var(--red)}
 
 <header>
   <div class="container nav">
+
     <a class="brand" href="#home" aria-label="Liquidity Displacement University homepage">
-      <span class="brand-mark">LDU</span>
       <span class="brand-name">LIQUIDITY DISPLACEMENT<small>UNIVERSITY™</small></span>
     </a>
 
@@ -585,6 +606,12 @@ footer .brand-mark{background:var(--red)}
     <div class="navright">
       <a class="btn glass-btn small" href="login.html">Student login</a>
       <a class="btn primary small member-button" href="register.html">Join LDU ↗</a>
+
+      <!-- SMALL LDU LOGO TOP RIGHT -->
+      <a href="#home" aria-label="LDU homepage">
+        <img src="ldu-small.png" class="nav-logo" alt="LDU logo">
+      </a>
+
       <button class="menu" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Open navigation" type="button">☰</button>
     </div>
   </div>
@@ -607,69 +634,83 @@ footer .brand-mark{background:var(--red)}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container hero-grid">
-    <div class="reveal">
-      <div class="kicker"><span class="kicker-dot"></span> Beyond indicators. Beyond noise.</div>
-      <h1>See the market.<br><span class="gradient-text">Understand the pattern.</span></h1>
-      <p class="hero-copy">
-        Welcome to Liquidity Displacement University™ — a trading education experience built around repeating market behaviour, proprietary pattern frameworks, structured learning and disciplined decision-making.
-        Learn to study the chart with purpose instead of chasing every movement.
-      </p>
+  <div class="container">
 
-      <div class="actions">
-        <a class="btn primary" href="#curriculum">Explore the university <span>↗</span></a>
-        <a class="btn glass-btn" href="register.html">Enter the university <span>→</span></a>
-      </div>
-
-      <div class="hero-meta">
-        <span class="chip">Proprietary frameworks</span>
-        <span class="chip">Structured education</span>
-        <span class="chip">Risk-aware learning</span>
-      </div>
+    <!-- BIG LDU MAIN LOGO -->
+    <div class="hero-main-logo">
+      <img
+        src="ldu-main.png"
+        alt="Liquidity Displacement University main logo"
+        fetchpriority="high"
+      >
     </div>
 
-    <div class="hero-visual reveal">
-      <div class="visual-glow"></div>
-      <div class="terminal">
-        <div class="terminal-head">
-          <div>
-            <div class="terminal-title">LDU · Market Intelligence</div>
-            <div class="terminal-sub">Observe · Understand · Review</div>
-          </div>
-          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="kicker"><span class="kicker-dot"></span> Beyond indicators. Beyond noise.</div>
+
+        <h1>See the market.<br><span class="gradient-text">Understand the pattern.</span></h1>
+
+        <p class="hero-copy">
+          Welcome to Liquidity Displacement University™ — a trading education experience built around repeating market behaviour, proprietary pattern frameworks, structured learning and disciplined decision-making.
+          Learn to study the chart with purpose instead of chasing every movement.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="#curriculum">Explore the university <span>↗</span></a>
+          <a class="btn glass-btn" href="register.html">Enter the university <span>→</span></a>
         </div>
 
-        <svg class="chart" viewBox="0 0 520 300" role="img" aria-label="Decorative illustration of market movement, not a live trading chart">
-          <defs>
-            <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#ff3448" stop-opacity=".28"/>
-              <stop offset="100%" stop-color="#ff3448" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="lineGlow" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#ff8792"/>
-              <stop offset="100%" stop-color="#ff3448"/>
-            </linearGradient>
-          </defs>
-          <g stroke="#ffffff" stroke-opacity=".075" stroke-width="1">
-            <path d="M0 50H520M0 100H520M0 150H520M0 200H520M0 250H520"/>
-            <path d="M65 0V300M130 0V300M195 0V300M260 0V300M325 0V300M390 0V300M455 0V300"/>
-          </g>
-          <path d="M0 230 L30 215 L53 229 L78 185 L100 202 L124 167 L147 179 L169 141 L195 158 L218 115 L240 132 L261 169 L285 148 L307 159 L330 109 L350 121 L372 86 L394 101 L417 66 L440 82 L462 42 L486 59 L520 24 L520 300 L0 300Z" fill="url(#areaFill)"/>
-          <path d="M0 230 L30 215 L53 229 L78 185 L100 202 L124 167 L147 179 L169 141 L195 158 L218 115 L240 132 L261 169 L285 148 L307 159 L330 109 L350 121 L372 86 L394 101 L417 66 L440 82 L462 42 L486 59 L520 24" fill="none" stroke="url(#lineGlow)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="330" cy="109" r="5" fill="#ff3448"/>
-          <circle cx="330" cy="109" r="12" fill="none" stroke="#ff3448" stroke-opacity=".55"/>
-          <path d="M330 109 L330 57 L410 57" stroke="#ff8792" stroke-opacity=".7" stroke-dasharray="4 5" fill="none"/>
-          <text x="417" y="61" fill="#ffb5bc" font-size="11" font-family="DM Sans">Observe</text>
-          <text x="17" y="24" fill="#9e9eac" font-size="10" font-family="DM Sans" letter-spacing="1.5">ILLUSTRATIVE MARKET MOVEMENT</text>
-          <text x="17" y="283" fill="#747482" font-size="10" font-family="DM Sans">Concept artwork · Not live market data</text>
-        </svg>
-
-        <div class="terminal-bottom">
-          <div class="terminal-stat"><small>THE FOUNDATION</small><strong>Pattern recognition</strong></div>
-          <div class="terminal-stat"><small>THE STANDARD</small><strong>Disciplined execution</strong></div>
+        <div class="hero-meta">
+          <span class="chip">Proprietary frameworks</span>
+          <span class="chip">Structured education</span>
+          <span class="chip">Risk-aware learning</span>
         </div>
       </div>
-      <div class="visual-caption">A learning environment designed around observation, context and process.</div>
+
+      <div class="hero-visual reveal">
+        <div class="visual-glow"></div>
+        <div class="terminal">
+          <div class="terminal-head">
+            <div>
+              <div class="terminal-title">LDU · Market Intelligence</div>
+              <div class="terminal-sub">Observe · Understand · Review</div>
+            </div>
+            <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+
+          <svg class="chart" viewBox="0 0 520 300" role="img" aria-label="Decorative illustration of market movement, not a live trading chart">
+            <defs>
+              <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff3448" stop-opacity=".28"/>
+                <stop offset="100%" stop-color="#ff3448" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="lineGlow" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#ff8792"/>
+                <stop offset="100%" stop-color="#ff3448"/>
+              </linearGradient>
+            </defs>
+            <g stroke="#ffffff" stroke-opacity=".075" stroke-width="1">
+              <path d="M0 50H520M0 100H520M0 150H520M0 200H520M0 250H520"/>
+              <path d="M65 0V300M130 0V300M195 0V300M260 0V300M325 0V300M390 0V300M455 0V300"/>
+            </g>
+            <path d="M0 230 L30 215 L53 229 L78 185 L100 202 L124 167 L147 179 L169 141 L195 158 L218 115 L240 132 L261 169 L285 148 L307 159 L330 109 L350 121 L372 86 L394 101 L417 66 L440 82 L462 42 L486 59 L520 24 L520 300 L0 300Z" fill="url(#areaFill)"/>
+            <path d="M0 230 L30 215 L53 229 L78 185 L100 202 L124 167 L147 179 L169 141 L195 158 L218 115 L240 132 L261 169 L285 148 L307 159 L330 109 L350 121 L372 86 L394 101 L417 66 L440 82 L462 42 L486 59 L520 24" fill="none" stroke="url(#lineGlow)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="330" cy="109" r="5" fill="#ff3448"/>
+            <circle cx="330" cy="109" r="12" fill="none" stroke="#ff3448" stroke-opacity=".55"/>
+            <path d="M330 109 L330 57 L410 57" stroke="#ff8792" stroke-opacity=".7" stroke-dasharray="4 5" fill="none"/>
+            <text x="417" y="61" fill="#ffb5bc" font-size="11" font-family="DM Sans">Observe</text>
+            <text x="17" y="24" fill="#9e9eac" font-size="10" font-family="DM Sans" letter-spacing="1.5">ILLUSTRATIVE MARKET MOVEMENT</text>
+            <text x="17" y="283" fill="#747482" font-size="10" font-family="DM Sans">Concept artwork · Not live market data</text>
+          </svg>
+
+          <div class="terminal-bottom">
+            <div class="terminal-stat"><small>THE FOUNDATION</small><strong>Pattern recognition</strong></div>
+            <div class="terminal-stat"><small>THE STANDARD</small><strong>Disciplined execution</strong></div>
+          </div>
+        </div>
+        <div class="visual-caption">A learning environment designed around observation, context and process.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -685,14 +726,8 @@ footer .brand-mark{background:var(--red)}
       <p>Not a promise of instant success. A place to study price behaviour, understand a framework and develop a more deliberate approach to trading.</p>
     </div>
 
-    <!-- FOUNDER IMAGE: POSITIONED CLOSE TO THE HEADING -->
     <div class="university-founder-image reveal">
-      <img
-        src="founder.png"
-        alt="Founder of Liquidity Displacement University"
-        loading="eager"
-        onerror="this.style.display='none'"
-      >
+      <img src="founder.png" alt="Founder of Liquidity Displacement University" loading="eager" onerror="this.style.display='none'">
     </div>
 
     <div class="mission-grid">
@@ -830,15 +865,16 @@ footer .brand-mark{background:var(--red)}
 
     <div class="partner-grid">
 
-      <!-- BLUE GUARDIAN -->
+      <!-- BLUE GUARDIAN CUSTOM SHIELD LOGO -->
       <article class="glass-card partner-card reveal">
         <div class="partner-top">
-          <img
-            class="partner-logo"
-            src="blueguardian.png"
-            alt="Blue Guardian logo"
-            loading="lazy"
-          >
+          <div class="partner-brand-icon">
+            <svg viewBox="0 0 64 64" fill="none" role="img" aria-label="Blue Guardian shield-style graphic">
+              <path d="M32 4L55 13V29C55 44 45 55 32 61C19 55 9 44 9 29V13L32 4Z" fill="#102D60"/>
+              <path d="M32 11L48 17V29C48 40 41 48 32 53C23 48 16 40 16 29V17L32 11Z" fill="#2874D0"/>
+              <path d="M22 32L29 39L43 24" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <div>
             <div class="partner-name">Blue Guardian</div>
             <div class="partner-tag">PROP FIRM RECOMMENDATION</div>
@@ -858,24 +894,19 @@ footer .brand-mark{background:var(--red)}
         </div>
 
         <div class="partner-actions">
-          <a
-            class="btn primary"
-            href="https://blueguardian.com/?afmc=LDM25"
-            target="_blank"
-            rel="noopener noreferrer"
-          >VISIT BLUE GUARDIAN ↗</a>
+          <a class="btn primary" href="https://blueguardian.com/?afmc=LDM25" target="_blank" rel="noopener noreferrer">VISIT BLUE GUARDIAN ↗</a>
         </div>
       </article>
 
-      <!-- EXNESS -->
+      <!-- EXNESS CUSTOM WORDMARK -->
       <article class="glass-card partner-card reveal">
         <div class="partner-top">
-          <img
-            class="partner-logo"
-            src="exness.png"
-            alt="Exness logo"
-            loading="lazy"
-          >
+          <div class="partner-brand-icon">
+            <div style="display:flex;align-items:center;gap:3px">
+              <span class="exness-symbol">E</span>
+              <span class="exness-wordmark">EXNESS</span>
+            </div>
+          </div>
           <div>
             <div class="partner-name">Exness</div>
             <div class="partner-tag">BROKER RECOMMENDATION</div>
@@ -890,12 +921,7 @@ footer .brand-mark{background:var(--red)}
         </p>
 
         <div class="partner-actions">
-          <a
-            class="btn primary"
-            href="https://one.exnessonelink.com/a/qtdth4ymfx"
-            target="_blank"
-            rel="noopener noreferrer"
-          >OPEN EXNESS ACCOUNT ↗</a>
+          <a class="btn primary" href="https://one.exnessonelink.com/a/qtdth4ymfx" target="_blank" rel="noopener noreferrer">OPEN EXNESS ACCOUNT ↗</a>
         </div>
       </article>
 
@@ -930,13 +956,11 @@ footer .brand-mark{background:var(--red)}
         </div>
       </div>
 
+      <!-- DISCORD-STYLE SVG ICON -->
       <div class="community-icon">
-        <img
-          class="community-logo"
-          src="discord.png"
-          alt="Discord logo"
-          loading="lazy"
-        >
+        <svg class="community-logo" viewBox="0 0 24 24" fill="white" role="img" aria-label="Discord-style community icon">
+          <path d="M19.3 5.3a17.5 17.5 0 0 0-4.3-1.3l-.5 1a16 16 0 0 0-5 0l-.5-1a17.5 17.5 0 0 0-4.3 1.3C2 9.2 1.3 13 1.7 16.7a17 17 0 0 0 5.3 2.7l1.1-1.8-1.7-.8.4-.3c3.3 1.5 6.9 1.5 10.2 0l.4.3-1.7.8 1.1 1.8a17 17 0 0 0 5.3-2.7c.5-4.3-.8-8-3.8-11.4ZM8.7 14.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/>
+        </svg>
       </div>
     </div>
   </div>
@@ -1371,4 +1395,4 @@ footer .brand-mark{background:var(--red)}
 </script>
 
 </body>
-  </html>
+</html>
