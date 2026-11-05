@@ -233,7 +233,6 @@ footer{color:#666;font-size:10px;padding:20px 0}
 
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-card">
     <div class="eyebrow">Liquidity Displacement University™</div>
@@ -257,7 +256,6 @@ footer{color:#666;font-size:10px;padding:20px 0}
   </div>
 </div>
 
-<!-- PORTAL -->
 <div id="portal" class="app hidden">
 
 <aside class="sidebar">
@@ -294,7 +292,6 @@ footer{color:#666;font-size:10px;padding:20px 0}
   <div class="user-pill" id="userEmail">Student account</div>
 </header>
 
-<!-- OVERVIEW -->
 <section class="page active" id="page-overview">
 
   <div class="hero">
@@ -367,7 +364,6 @@ footer{color:#666;font-size:10px;padding:20px 0}
 
 </section>
 
-<!-- VIP ACCESS -->
 <section class="page" id="page-vip">
 
   <div class="hero">
@@ -399,7 +395,6 @@ footer{color:#666;font-size:10px;padding:20px 0}
 
 </section>
 
-<!-- LIVE CHAT -->
 <section class="page" id="page-chat">
 
   <div class="hero">
@@ -438,7 +433,6 @@ footer{color:#666;font-size:10px;padding:20px 0}
 
 </section>
 
-<!-- CERTIFICATES -->
 <section class="page" id="page-certificates">
 
   <div class="hero">
@@ -474,7 +468,6 @@ footer{color:#666;font-size:10px;padding:20px 0}
 
 </section>
 
-<!-- FEES -->
 <section class="page" id="page-fees">
 
   <div class="hero">
@@ -497,7 +490,8 @@ footer{color:#666;font-size:10px;padding:20px 0}
         educational resources through Whop after purchase.
       </p>
       <a class="btn" id="mentorshipCheckout"
-         href="#" target="_blank" rel="noopener">
+         href="https://whop.com/checkout/plan_Y08CNHiQN3pya"
+         target="_blank" rel="noopener">
         Enrol in Mentorship
       </a>
     </div>
@@ -511,7 +505,8 @@ footer{color:#666;font-size:10px;padding:20px 0}
         resources through Whop after purchase.
       </p>
       <a class="btn gold" id="signalsCheckout"
-         href="#" target="_blank" rel="noopener">
+         href="https://whop.com/checkout/plan_J8We2VYRgzsnz"
+         target="_blank" rel="noopener">
         Join VIP Signals
       </a>
     </div>
@@ -527,7 +522,6 @@ footer{color:#666;font-size:10px;padding:20px 0}
 
 </section>
 
-<!-- ACCOUNT -->
 <section class="page" id="page-account">
 
   <div class="card">
@@ -578,18 +572,18 @@ const SUPABASE_URL =
   "https://oordibcpeyvmlybmorhm.supabase.co";
 
 const SUPABASE_ANON_KEY =
-  "sb_publishable_95GwON_auW2nW4hDUaQj2A_5Xi6NB60";
+  "sb_publishable_95GWON_auW2nW4hDUaQj2A_5Xi6NB60";
 
-/*
-  REPLACE THESE TWO VALUES WITH YOUR NEW WHOP LINKS.
-*/
+/* REAL WHOP CHECKOUT LINKS */
+
 const WHOP_MENTORSHIP_URL =
-  "PASTE_YOUR_MENTORSHIP_WHOP_CHECKOUT_LINK_HERE";
+  "https://whop.com/checkout/plan_Y08CNHiQN3pya";
 
 const WHOP_SIGNALS_URL =
-  "PASTE_YOUR_VIP_SIGNALS_WHOP_CHECKOUT_LINK_HERE";
+  "https://whop.com/checkout/plan_J8We2VYRgzsnz";
 
-/* Existing LDU student support */
+/* LDU STUDENT SUPPORT */
+
 const DISCORD_URL =
   "https://discord.gg/bB2dDFV7P";
 
@@ -681,32 +675,11 @@ document.querySelectorAll(".nav button").forEach(button => {
 
 function configureCheckout() {
 
-  const mentorship = $("mentorshipCheckout");
-  const signals = $("signalsCheckout");
+  $("mentorshipCheckout").href =
+    WHOP_MENTORSHIP_URL;
 
-  if (
-    WHOP_MENTORSHIP_URL.startsWith("https://whop.com/")
-  ) {
-    mentorship.href = WHOP_MENTORSHIP_URL;
-  } else {
-    mentorship.href = "#";
-    mentorship.addEventListener("click", event => {
-      event.preventDefault();
-      alert("The Mentorship Whop checkout link has not been configured yet.");
-    });
-  }
-
-  if (
-    WHOP_SIGNALS_URL.startsWith("https://whop.com/")
-  ) {
-    signals.href = WHOP_SIGNALS_URL;
-  } else {
-    signals.href = "#";
-    signals.addEventListener("click", event => {
-      event.preventDefault();
-      alert("The VIP Signals Whop checkout link has not been configured yet.");
-    });
-  }
+  $("signalsCheckout").href =
+    WHOP_SIGNALS_URL;
 }
 
 /* =========================================
@@ -801,10 +774,7 @@ function getProgrammeName(record) {
     return "LDU Mentorship";
   }
 
-  if (
-    value.includes("signal") ||
-    value.includes("vip signals")
-  ) {
+  if (value.includes("signal")) {
     return "LDU VIP Signals";
   }
 
@@ -954,10 +924,6 @@ function addSixMonths(date) {
 
   result.setMonth(result.getMonth() + 6);
 
-  /*
-    Prevent month-end rollover from creating
-    an incorrect eligibility date.
-  */
   if (result.getDate() < originalDay) {
     result.setDate(0);
   }
@@ -1272,15 +1238,11 @@ supabaseClient.auth.onAuthStateChange(
   async (event, session) => {
 
     if (event === "SIGNED_IN" && session) {
-
       await showPortal(session.user);
-
     }
 
     if (event === "SIGNED_OUT") {
-
       location.reload();
-
     }
   }
 );
