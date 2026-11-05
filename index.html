@@ -122,7 +122,7 @@ header{
 }
 .brand-name{font:800 .78rem/1.3 Manrope,sans-serif;letter-spacing:.035em;color:#f5f5f5}
 .brand-name small{display:block;color:#aaa;font-size:.63rem;letter-spacing:.22em;margin-top:4px}
-.navlinks{display:flex;align-items:center;gap:17px;color:#c0c0c0;font-size:.77rem;font-weight:700}
+.navlinks{display:flex;align-items:center;gap:15px;color:#c0c0c0;font-size:.74rem;font-weight:700}
 .navlinks a{transition:color .2s}
 .navlinks a:hover{color:var(--pink)}
 .navright{display:flex;align-items:center;gap:9px}
@@ -201,6 +201,7 @@ h1{font-size:clamp(3.1rem,6.7vw,6.2rem);font-weight:800;max-width:730px;color:#f
 .section-head h2,.section-title{font-size:clamp(2.1rem,4.5vw,3.8rem);max-width:720px;color:#f5f5f5}
 .section-head p{max-width:480px;color:#aaa;font-size:.89rem;line-height:1.85}
 .section-intro{color:#aaa;max-width:720px;margin-top:16px;line-height:1.9}
+.section-footnote{font-size:.75rem;color:#777;line-height:1.85;margin-top:22px}
 .glass-card{
   border:1px solid var(--line);background:#151515;border-radius:var(--radius);
   box-shadow:0 12px 35px rgba(0,0,0,.2);backdrop-filter:blur(12px);
@@ -356,7 +357,51 @@ footer .brand-mark{background:var(--red)}
 }
 .community-panel h3{font-size:clamp(1.5rem,4vw,2.3rem);margin-bottom:12px;color:#f5f5f5}
 .community-panel p{max-width:650px;color:#aaa;font-size:.88rem;line-height:1.9}
-.community-icon{width:65px;height:65px;flex-shrink:0;border-radius:20px;display:grid;place-items:center;background:rgba(224,0,32,.13);border:1px solid rgba(255,105,123,.2);color:var(--pink);font-size:1.8rem}
+.community-icon{
+  width:65px;height:65px;flex-shrink:0;border-radius:20px;
+  display:grid;place-items:center;background:rgba(224,0,32,.13);
+  border:1px solid rgba(255,105,123,.2);padding:9px;
+}
+.community-logo{width:100%;height:100%;object-fit:contain}
+
+/* PARTNER RECOMMENDATIONS */
+.partner-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.partner-card{
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  gap:17px;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(145deg,#181818,#101010);
+  border-radius:22px;
+}
+.partner-top{display:flex;align-items:center;gap:14px}
+.partner-logo{
+  width:52px;height:52px;flex-shrink:0;
+  object-fit:contain;padding:5px;border-radius:13px;
+  background:#fff;border:1px solid rgba(255,255,255,.12);
+}
+.partner-name{font:800 1.08rem Manrope,sans-serif;color:#fff;letter-spacing:-.035em}
+.partner-tag{font-size:.65rem;color:#ff7887;font-weight:800;letter-spacing:.10em;text-transform:uppercase;margin-top:4px}
+.partner-card p{font-size:.83rem;color:#aaa;line-height:1.85}
+.partner-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:auto}
+.partner-actions .btn{font-size:.76rem}
+.partner-code{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 14px;border:1px dashed rgba(255,105,123,.4);
+  border-radius:13px;background:rgba(224,0,32,.08);
+}
+.partner-code strong{font:800 1.05rem Manrope,sans-serif;letter-spacing:.13em;color:#fff}
+.partner-code button{
+  border:1px solid rgba(255,255,255,.15);background:#222;color:#fff;
+  border-radius:9px;padding:8px 11px;font-size:.7rem;font-weight:800;
+}
+.partner-code button:hover{background:#333}
+.partner-disclosure{font-size:.69rem!important;color:#777!important;line-height:1.8;margin-top:20px}
 
 /* LDM50 POPUP */
 .ldm50-overlay{
@@ -392,7 +437,13 @@ footer .brand-mark{background:var(--red)}
 .modal p{font-size:.88rem;line-height:1.9;color:#aaa;margin-bottom:13px}
 .modal-note{border:1px solid var(--line);background:#202020;border-radius:15px;padding:16px;margin:20px 0;font-size:.78rem;color:#bbb;line-height:1.8}
 .modal .actions{margin-top:18px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:150;display:none;max-width:calc(100% - 30px);padding:12px 17px;border-radius:13px;background:#171717;border:1px solid rgba(255,255,255,.15);color:white;font-size:.82rem;box-shadow:0 10px 40px #0007}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:150;display:none;max-width:calc(100% - 30px);
+  padding:12px 17px;border-radius:13px;background:#171717;
+  border:1px solid rgba(255,255,255,.15);color:white;font-size:.82rem;
+  box-shadow:0 10px 40px #0007
+}
 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
@@ -401,13 +452,12 @@ footer .brand-mark{background:var(--red)}
   *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
 }
-@media(max-width:1000px){
-  .navlinks{gap:12px}
+@media(max-width:1100px){
+  .navlinks{gap:10px;font-size:.69rem}
   .navright .member-button{display:none}
   .hero-grid{gap:35px}
   .hero{padding-top:75px}
   .benefit-grid{grid-template-columns:repeat(2,1fr)}
-  .mission-grid,.dark-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:760px){
   .container{width:calc(100% - 32px)}
@@ -430,6 +480,7 @@ footer .brand-mark{background:var(--red)}
   .footer-top{display:grid;grid-template-columns:1fr 1fr}
   .footer-brand{grid-column:1/-1}
   .community-panel{align-items:flex-start;flex-direction:column}
+  .partner-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){
   .container{width:calc(100% - 26px)}
@@ -465,6 +516,7 @@ footer .brand-mark{background:var(--red)}
   .promo-strip .btn{width:100%}
   .promo-actions{width:100%}
   .promo-actions .btn{width:100%}
+  .partner-card{padding:20px}
 }
 </style>
 </head>
@@ -497,6 +549,7 @@ footer .brand-mark{background:var(--red)}
       <a href="#university">University</a>
       <a href="#curriculum">Curriculum</a>
       <a href="#pricing">Pricing</a>
+      <a href="#recommendations">Platforms</a>
       <a href="#community">Community</a>
       <a href="#founder">Founder</a>
       <a href="#faq">FAQ</a>
@@ -513,6 +566,7 @@ footer .brand-mark{background:var(--red)}
     <a href="#university">About the university</a>
     <a href="#curriculum">Learning curriculum</a>
     <a href="#pricing">Membership and pricing</a>
+    <a href="#recommendations">Broker & prop firm recommendations</a>
     <a href="#community">Discord community</a>
     <a href="#benefits">Student experience</a>
     <a href="#founder">Meet the founder</a>
@@ -524,6 +578,7 @@ footer .brand-mark{background:var(--red)}
 
 <main id="home">
 
+<!-- HERO -->
 <section class="hero">
   <div class="container hero-grid">
     <div class="reveal">
@@ -592,6 +647,7 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
+<!-- UNIVERSITY -->
 <section class="section section-alt" id="university">
   <div class="container">
     <div class="section-head reveal">
@@ -625,6 +681,7 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
+<!-- PHILOSOPHY -->
 <section class="section dark-feature">
   <div class="container dark-grid">
     <div class="dark-copy reveal">
@@ -646,6 +703,7 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
+<!-- CURRICULUM -->
 <section class="section" id="curriculum">
   <div class="container">
     <div class="section-head reveal">
@@ -666,6 +724,7 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
+<!-- PRICING -->
 <section class="section section-alt" id="pricing">
   <div class="container">
     <div class="section-head reveal">
@@ -717,7 +776,104 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
-<section class="section" id="community">
+<!-- RECOMMENDATIONS -->
+<section class="section" id="recommendations">
+  <div class="container">
+
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Trading resources</div>
+        <h2>Platforms we recommend.</h2>
+      </div>
+      <p>Explore selected trading platforms and services used within the broader trading environment. Review each provider's conditions and risks before registering.</p>
+    </div>
+
+    <div class="partner-grid">
+
+      <!-- BLUE GUARDIAN -->
+      <article class="glass-card partner-card reveal">
+        <div class="partner-top">
+          <img
+            class="partner-logo"
+            src="blueguardian.png"
+            alt="Blue Guardian logo"
+            loading="lazy"
+          >
+          <div>
+            <div class="partner-name">Blue Guardian</div>
+            <div class="partner-tag">PROP FIRM RECOMMENDATION</div>
+          </div>
+        </div>
+
+        <p>
+          Explore Blue Guardian's funded trading programmes,
+          account options and evaluation conditions.
+          Understand the rules, drawdown limits and payout
+          requirements before purchasing any account.
+        </p>
+
+        <div class="partner-code">
+          <strong id="blueGuardianCode">LDM25</strong>
+          <button type="button" id="copyBlueGuardian">COPY CODE</button>
+        </div>
+
+        <div class="partner-actions">
+          <a
+            class="btn primary"
+            href="https://blueguardian.com/?afmc=LDM25"
+            target="_blank"
+            rel="noopener noreferrer"
+          >VISIT BLUE GUARDIAN ↗</a>
+        </div>
+      </article>
+
+      <!-- EXNESS -->
+      <article class="glass-card partner-card reveal">
+        <div class="partner-top">
+          <img
+            class="partner-logo"
+            src="exness.png"
+            alt="Exness logo"
+            loading="lazy"
+          >
+          <div>
+            <div class="partner-name">Exness</div>
+            <div class="partner-tag">BROKER RECOMMENDATION</div>
+          </div>
+        </div>
+
+        <p>
+          Explore Exness trading services, account options
+          and platform features. Review applicable fees,
+          leverage, regulations and trading risks before
+          opening an account.
+        </p>
+
+        <div class="partner-actions">
+          <a
+            class="btn primary"
+            href="https://one.exnessonelink.com/a/qtdth4ymfx"
+            target="_blank"
+            rel="noopener noreferrer"
+          >OPEN EXNESS ACCOUNT ↗</a>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="partner-disclosure">
+      Affiliate disclosure: Some links may be referral or affiliate
+      links. LDU may receive compensation if you register or purchase
+      through them, at no additional cost to you where applicable.
+      These recommendations are not guarantees of trading success.
+      Trading involves substantial financial risk.
+    </p>
+
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="section section-alt" id="community">
   <div class="container">
     <div class="section-head reveal">
       <div><div class="eyebrow">The LDU community</div><h2>Learn alongside other market students.</h2></div>
@@ -733,12 +889,21 @@ footer .brand-mark{background:var(--red)}
           <a class="btn primary" href="https://discord.gg/bB2dDFV7P" target="_blank" rel="noopener noreferrer">JOIN THE DISCORD COMMUNITY ↗</a>
         </div>
       </div>
-      <div class="community-icon" aria-hidden="true">◈</div>
+
+      <div class="community-icon">
+        <img
+          class="community-logo"
+          src="discord.png"
+          alt="Discord logo"
+          loading="lazy"
+        >
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section-alt" id="benefits">
+<!-- STUDENT EXPERIENCE -->
+<section class="section" id="benefits">
   <div class="container">
     <div class="section-head reveal">
       <div><div class="eyebrow">The student experience</div><h2>A home for your trading education.</h2></div>
@@ -763,7 +928,8 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
-<section class="section" id="founder">
+<!-- FOUNDER -->
+<section class="section section-alt" id="founder">
   <div class="container founder-grid">
     <div class="founder-art reveal">
       <div class="founder-monogram">TN</div>
@@ -796,7 +962,8 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
-<section class="section section-alt" id="reviews">
+<!-- REVIEWS -->
+<section class="section" id="reviews">
   <div class="container">
     <div class="section-head reveal">
       <div><div class="eyebrow">Trust and transparency</div><h2>Real learning. Honest expectations.</h2></div>
@@ -812,7 +979,8 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
-<section class="section" id="enrolment">
+<!-- ENROLMENT -->
+<section class="section section-alt" id="enrolment">
   <div class="container">
     <div class="section-head reveal">
       <div><div class="eyebrow">Your next move</div><h2>Getting started is straightforward.</h2></div>
@@ -837,7 +1005,8 @@ footer .brand-mark{background:var(--red)}
   </div>
 </section>
 
-<section class="section section-alt" id="faq">
+<!-- FAQ -->
+<section class="section" id="faq">
   <div class="container">
     <div class="section-head reveal">
       <div><div class="eyebrow">Questions, answered</div><h2>Know what you're joining.</h2></div>
@@ -855,10 +1024,12 @@ footer .brand-mark{background:var(--red)}
       <details><summary>Does LDU guarantee profits or funded-account success?</summary><p>No. Trading carries a risk of loss. Education cannot guarantee profits, funded-account approval, payouts or any particular result. Results depend on many factors, and losses are possible.</p></details>
       <details><summary>Can beginners join?</summary><p>People should review the programme information and prerequisites provided for the particular course before enrolling. Trading involves risk, and beginners should understand the risks before trading with real money.</p></details>
       <details><summary>How do I get help with my account?</summary><p>Contact <a href="mailto:liquiditydisplacement@gmail.com" style="color:#ff7887;text-decoration:underline">liquiditydisplacement@gmail.com</a> for enquiries. Never send your password or full payment credentials by email.</p></details>
+      <details><summary>Are Blue Guardian and Exness affiliated with LDU?</summary><p>Blue Guardian and Exness are third-party platforms. Some links on this website are referral links, and LDU may receive compensation for eligible registrations. Review each provider's terms and risks independently.</p></details>
     </div>
   </div>
 </section>
 
+<!-- FINAL CTA -->
 <section class="cta-section">
   <div class="container">
     <div class="cta-panel reveal">
@@ -876,6 +1047,7 @@ footer .brand-mark{background:var(--red)}
 
 </main>
 
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -893,6 +1065,7 @@ footer .brand-mark{background:var(--red)}
           <a href="#university">The university</a>
           <a href="#curriculum">Curriculum</a>
           <a href="#pricing">Membership</a>
+          <a href="#recommendations">Trading platforms</a>
           <a href="#community">Discord community</a>
           <a href="#founder">Founder</a>
           <a href="founder.html">Meet the founder page</a>
@@ -990,6 +1163,7 @@ footer .brand-mark{background:var(--red)}
     },{once:true});
   }
 
+  /* TOAST */
   function showToast(message){
     const toast = $("toast");
     toast.textContent = message;
@@ -1060,7 +1234,7 @@ footer .brand-mark{background:var(--red)}
     if(event.target === ldm50Popup) closeLdm50();
   });
 
-  /* COPY DISCOUNT CODE */
+  /* COPY LDM50 */
   async function copyLdm50Code(button){
     const code = "LDM50";
 
@@ -1102,6 +1276,45 @@ footer .brand-mark{background:var(--red)}
   $("copyLdm50Inline").addEventListener("click",function(){
     copyLdm50Code(this);
   });
+
+  /* COPY BLUE GUARDIAN REFERRAL CODE */
+  const copyBlueGuardianButton = $("copyBlueGuardian");
+
+  if(copyBlueGuardianButton){
+    copyBlueGuardianButton.addEventListener("click",async function(){
+      const code = "LDM25";
+
+      try{
+        if(navigator.clipboard && window.isSecureContext){
+          await navigator.clipboard.writeText(code);
+        }else{
+          const temp = document.createElement("textarea");
+          temp.value = code;
+          temp.setAttribute("readonly","");
+          temp.style.position = "fixed";
+          temp.style.opacity = "0";
+          document.body.appendChild(temp);
+          temp.select();
+
+          const copied = document.execCommand("copy");
+          document.body.removeChild(temp);
+
+          if(!copied) throw new Error("Copy unavailable");
+        }
+
+        const originalText = this.textContent;
+        this.textContent = "✓ COPIED!";
+        showToast("Blue Guardian code LDM25 copied!");
+
+        setTimeout(()=>{
+          this.textContent = originalText;
+        },2500);
+
+      }catch(error){
+        showToast("Copy unavailable. Please copy LDM25 manually.");
+      }
+    });
+  }
 
   /* ESCAPE KEY */
   document.addEventListener("keydown",event=>{
