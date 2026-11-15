@@ -226,10 +226,15 @@ details p{font-size:.83rem;color:#aaa;line-height:1.9;padding:0 0 20px}
 .signal-card{padding:30px;position:relative;overflow:hidden;border-color:rgba(255,105,123,.25);background:radial-gradient(ellipse at 100% 0,rgba(224,0,32,.13),transparent 48%),#141414}
 .signal-top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:25px}
 .signal-status{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,105,123,.3);background:rgba(224,0,32,.12);color:#ff8795;border-radius:999px;padding:7px 12px;font-size:.66rem;font-weight:800;letter-spacing:.1em}
-.signal-status:before{content:"";width:7px;height:7px;border-radius:50%;background:#ff4057;box-shadow:0 0 10px #ff4057}
+.signal-status:before{content:"";width:7px;height:7px;border-radius:50%;background:#ff4057;box-shadow:0 0 10px #ff4057;animation:signalPulse 1.5s infinite}
+@keyframes signalPulse{0%,100%{opacity:1;box-shadow:0 0 10px #ff4057}50%{opacity:.4;box-shadow:0 0 3px #ff4057}}
 .signal-date{font-size:.72rem;color:#999}
 .signal-instrument{font:800 clamp(1.7rem,5vw,2.5rem) Manrope,sans-serif;color:#fff;margin-bottom:5px}
 .signal-direction{color:#57d69a;font-weight:900;font-size:.83rem;letter-spacing:.12em}
+
+/* FIXED SIGNAL GRAPHIC */
+.signal-graphic-wrap{width:100%;margin:22px 0 24px;padding:10px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:#090909;overflow:hidden}
+.signal-graphic{display:block;width:100%;height:auto;max-height:650px;object-fit:contain;object-position:center;border-radius:12px}
 .signal-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
 .signal-level{padding:18px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.035)}
 .signal-level small{display:block;color:#999;font-size:.65rem;letter-spacing:.12em;font-weight:800;margin-bottom:7px}
@@ -398,6 +403,7 @@ footer .brand-mark{background:var(--red)}
  .signal-level{padding:12px 9px}
  .signal-level small{font-size:.55rem}
  .signal-level strong{font-size:1.05rem}
+ .signal-graphic-wrap{padding:6px;margin:17px 0 20px}
 }
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
@@ -601,18 +607,30 @@ footer .brand-mark{background:var(--red)}
 <section class="section section-alt" id="signals">
  <div class="container">
   <div class="section-head reveal">
-   <div><div class="eyebrow">LDU market intelligence</div><h2>Published trading signal.</h2></div>
+   <div><div class="eyebrow">LDU market intelligence</div><h2>Live trading signal.</h2></div>
    <p>Review the published trade idea and its stated levels. Always verify the current chart and market conditions before making any trading decision.</p>
   </div>
 
   <article class="glass-card signal-card reveal">
    <div class="signal-top">
-    <span class="signal-status">PUBLISHED SETUP · HISTORICAL REFERENCE</span>
+    <span class="signal-status">LIVE SIGNAL · XAUUSD BUY</span>
     <span class="signal-date">Published: 13 November 2026</span>
    </div>
 
    <div class="signal-instrument">XAUUSD · GOLD</div>
    <div class="signal-direction">BUY ▲</div>
+
+   <!-- SIGNAL IMAGE: FILE MUST BE IN THE SAME MAIN FOLDER AS index.html -->
+   <div class="signal-graphic-wrap" id="signalGraphicWrap">
+    <img
+     class="signal-graphic"
+     src="./xauusd-buy-nov-13-2026.png"
+     alt="LDU XAUUSD BUY live trading signal graphic"
+     loading="eager"
+     fetchpriority="high"
+     onerror="this.onerror=null;this.parentElement.style.display='none';console.error('Signal graphic not found. Check the filename and GitHub main folder.');"
+    >
+   </div>
 
    <div class="signal-levels">
     <div class="signal-level"><small>INSTRUMENT</small><strong>XAUUSD</strong></div>
@@ -620,13 +638,13 @@ footer .brand-mark{background:var(--red)}
     <div class="signal-level sl"><small>STOP LOSS</small><strong>3,840.00</strong></div>
    </div>
 
-   <p class="signal-note">This is the published XAUUSD BUY setup dated 13 November 2026. The levels are displayed as originally supplied and are not a confirmation that the trade remains open or valid.</p>
+   <p class="signal-note">LDU XAUUSD BUY signal, published 13 November 2026. The displayed levels are the levels supplied in this website's original signal section. Check the latest LDU update and current market chart to confirm that the signal and levels remain valid.</p>
 
    <div class="signal-warning">
-    IMPORTANT: This signal is not a live price feed. Market prices move, and a previously published setup may already be invalid, completed or no longer suitable. Check the latest market conditions and independently assess risk before trading. This is educational information, not personalised financial advice.
+    RISK NOTICE: This is a trading signal, not a guarantee of execution or profit. Market prices can change quickly. Confirm the current status, entry conditions, stop loss and target before taking any action. Do not rely on an old screenshot as a live price feed. Trading involves substantial risk and you may lose money.
    </div>
   </article>
-  <p class="section-footnote">For new signals, update this section with the latest confirmed instrument, direction, publication date, entry information, stop loss and target levels. Do not leave an old setup labelled as active.</p>
+  <p class="section-footnote">When this signal is closed, invalidated or replaced, update its status and levels promptly. Only display a live label while the signal is genuinely active.</p>
  </div>
 </section>
 
